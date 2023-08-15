@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHOOPEN</title>
+    <!-- 파비콘 -->
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.elandrs.com/f/img/favicon/shoopen.ico" />
+    <!-- 폰트어썸 외부 링크 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- 스와이퍼 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="./css/common.css" />
+    <!-- 메인 CSS -->
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <!-- 상단영역 -->
+    <header id="top">
+      <!-- 속박스 -->
+      <div class="top fxbx">
+        <!-- GNB -->
+        <nav>
+          <div class="gnb">
+            <!-- 1. 로고영역 -->
+            <div class="logo">
+              <a href="index.html">
+                <img src="./images/logo/logo.png" alt="메인로고" />
+              </a>
+            </div>
+            <!-- 2. 카테고리영역 -->
+            <category-comp></category-comp>
+          </div>
+          <!-- 3. 사이드 영역-->
+          <side-comp></side-comp>
+        </nav>
+        <!-- 3-1. 로그인/회원가입 컴포넌트 -->
+        <user-comp></user-comp>
+        <!-- 3-2. 위시리스트 컴포넌트 -->
+        <wish-comp></wish-comp>
+      </div>
+    </header>
+    <!-- 메인영역 -->
+    <main id="cont">
+      <!-- 속박스 -->
+      <div class="cont">
+        <!-- section1 : 배너영역 -->
+        <section id="main_banner">
+          <div class="mSwiper mySwiper">
+            <ul class="swiper-wrapper main_bannerwrap"></ul>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <button type="button" class="swiper-btn-toggle"></button>
+            <div class="pagination_container">
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </section>
+        <!-- section2 : best -->
+        <mb-comp></mb-comp>
+        <!-- section3 : special -->
+        <section class="main_special">
+          <div class="mstit_bx">
+            <dl class="mstit">
+              <dt class="main_tit">Magazine</dt>
+              <dd class="morebtn">
+                <a href="#">전체보기</a>
+              </dd>
+            </dl>
+          </div>
+          <div class="msWrap"></div>
+        </section>
+        <!-- section3 : media -->
+        <section class="main_media">
+          <div class="media_wrap mSwiper3 mySwiper">
+            <h3>MEDIA</h3>
+            <ul class="swiper-wrapper"></ul>
+          </div>
+        </section>
+        <!-- section4 : new -->
+        <mn-comp></mn-comp>
+        <!-- section5 : offline -->
+        <section class="main_store">
+          <div class="store">
+            <div class="storetit">
+              <h2>OFF-LINE</h2>
+            </div>
+          </div>
+          <div class="map_search_wrap">
+            <div class="map_search">
+              <div class="tabbx">
+                <ul>
+                  <li>매장찾기</li>
+                  <li>지역검색</li>
+                </ul>
+              </div>
+              <!-- 지역검색 클릭시 표시될 부분 -->
+              <div id="map_contents">
+                <div class="txt_title2">
+                  <b>지역검색</b>
+                </div>
+                <div class="locals"></div>
+              </div>
+              <!-- 매장찾기 클릭시 표시될 부분 -->
+                <div class="txtbx">
+                  <div class="txt_inner">
+                    <div class="txt_title">
+                      <b>매장찾기</b>
+                    </div>
+                    <div class="txt_cont">
+                      <label>
+                        <input type="text" id="store_search" name="store_search" placeholder="지점명을 입력하세요." />
+                      </label>
+                      <i class="fa-regular fa-magnifying-glass"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="contbx">
+                  <div class="cont_inner"></div>
+                </div>
+            </div>
+            <div class="map_list">
+              <div class="map_inner">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2874780708453!2d127.0242945754061!3d37.50113732787629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f5f796c1%3A0x9f057c75dd5ba9!2z7IqI7Y6cIOygkO2UhOuwgOudvOuFuOygkA!5e0!3m2!1sko!2skr!4v1692079929612!5m2!1sko!2skr" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"> </iframe>
+              </div>
+              <!-- 지점 좌표 위 안내툴팁 -->
+              <div class="map_info">
+                <div class="map_info_inner">
+                  <div class="info_tit_bx">
+                    <h3>점프밀라노점</h3>
+                    <p>서울특별시 강남구 강남대로 432 점프밀라노 강남점 지하1층</p>
+                    <p>02-6203-6881</p>
+                  </div>
+                  <div class="morebtn_bx">
+                    <em>자세히 보기</em>
+                  </div>
+                </div>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- 하단영역 -->
+    <footer id="info">
+      <!-- 속박스 -->
+      <div class="info">
+        <!-- 푸터영역 -->
+        <foot-comp></foot-comp>
+        <p class="f_copyright">COPYRIGHT © WONDERPLACE ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+    <!-- 뷰JS 스탠드얼론 버전 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- 뷰JS vuex CDN -->
+    <script src="https://unpkg.com/vuex@3.0.0"></script>
+
+    <!-- 스와이퍼 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <!-- 제이쿼리 라이브러리 -->
+    <script src="./js/plugin/jquery-3.6.0.min.js"></script>
+    <script src="./js/plugin/jquery-ui.min.js"></script>
+
+    <!-- 메인페이지 JS -->
+    <script src="./js/common.js" type="module"></script>
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>

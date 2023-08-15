@@ -1,0 +1,500 @@
+@charset "utf-8";
+
+/* 웹&앱PJ 메인페이지 CSS - main.css */
+
+/*************** 메인영역 ***************/
+main {
+  padding-top: 80px;
+}
+
+/******* section1 *******/
+/* 배너영역 - 스와이퍼 */
+#main_banner {
+  position: relative;
+}
+
+.mSwiper {
+  width: 100%;
+  height: 80vh;
+}
+
+.swiper-slide img,
+.swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-next {
+  color: rgba(255, 255, 255, 0.8);
+  right: 4%;
+  user-select: none;
+}
+
+.swiper-button-prev {
+  color: rgba(255, 255, 255, 0.8);
+  left: 4%;
+  user-select: none;
+}
+
+.pagination_container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  bottom: 17%;
+}
+
+/* 프로그레스바 */
+.swiper-horizontal > .swiper-pagination-progressbar,
+.swiper-pagination-progressbar.swiper-pagination-horizontal,
+.swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite,
+.swiper-vertical > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
+  position: relative;
+  width: min(50vw, 305px);
+  height: 4px;
+  top: auto;
+  bottom: -60px;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.swiper-pagination2.swiper-pagination-fraction.swiper-pagination-horizontal > span {
+  font-size: min(3vw, 14px);
+}
+
+/* 페이지네이션 */
+.swiper-pagination-fraction {
+  position: absolute;
+  color: #fff;
+  bottom: 15%;
+  left: 105%;
+  white-space: nowrap;
+  font-weight: 600;
+  width: auto;
+  z-index: 1;
+  font-size: 15px;
+  height: fit-content;
+}
+
+/******* section1 *******/
+.mbtit_bx, .mntit_bx {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.mbtit1 {
+  font-size: 30px;
+  line-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* 전체보기 버튼 */
+.morebtn > a {
+  font-size: 18px;
+  color: #767676;
+  background: url(../images/icon/arrow_s_r.png) center right no-repeat;
+  background-size: 8px auto;
+  padding-right: 20px;
+  font-weight: 500;
+}
+
+.main_best, .main_special, .main_media,
+.main_new, .main_store {
+  position: relative;
+  padding: 70px;
+  width: 100%;
+}
+
+.main_tit {
+  margin-right: 30px;
+  font-family: var(--shoopen-font-eng);
+  font-weight: 600;
+  word-spacing: 8px;
+}
+
+.mbtit2, .mntit2 {
+  gap: 0 22px;
+  display: flex;
+  align-items: center;
+}
+
+.mbtit2 a, .mntit2 a {
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+}
+
+.mbtit2 > dd.on > a,
+.mntit2 > dd.on > a {
+  font-weight: 700;
+  color: #111;
+}
+
+/* 상품리스트 */
+.mbList > ul, .mnList > ul {
+  display: flex;
+  gap: 0 20px;
+}
+
+.mbList .bestItem,
+.mnList .newItem {
+  width: 25%;
+  height: 100%;
+}
+
+.mbList .bestItem img,
+.mnList .newItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.best-img {
+  position: relative;
+}
+
+/* 순위박스 */
+.ranking_flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 38px;
+}
+
+/* 상품 설명박스 */
+.original-price > em {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 16px;
+  font-family: var(--shoopen-font-eng);
+}
+
+.discount-price > em {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: var(--shoopen-font-eng);
+}
+
+.percent-price > em {
+  color: red;
+  font-size: 20px;
+}
+
+.percent-price {
+  float: right;
+}
+
+.best-txt > p {
+  font-size: 14px;
+}
+
+.best-txt > strong {
+  font-size: 13px;
+}
+
+/******* section2 *******/
+.main_special {
+  background-color: #f8f8f8;
+}
+
+.mstit {
+  font-size: 30px;
+  line-height: 44px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.msWrap {
+  display: flex;
+}
+
+.msWrap > .msList img {
+  height: 100%;
+}
+
+.msList > figcaption {
+  padding-top: 21px;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.special-tit {
+  color: #888;
+  font-size: 18px;
+  font-family: var(--shoopen-font-sub);
+  font-weight: 700;
+}
+
+.special-desc {
+  font-family: var(--shoopen-font-sub);
+  margin-top: 5px;
+}
+
+/******* section3 *******/
+.media_wrap > ul {
+  display: flex;
+  gap: 0 2px;
+}
+
+.media_wrap > h3,
+.storetit > h2 {
+  font-size: 30px;
+  padding-bottom: 30px;
+  font-weight: 600;
+  font-family: var(--shoopen-font-eng);
+}
+
+.prod1bx, .prod2bx {
+  display: flex;
+  align-items: center;
+}
+
+.left_img {
+  margin-right: 10px;
+  width: 80px;
+  height: 90px;
+}
+
+.media_depth {
+  border-bottom: 1px solid #1b1b1b;
+  padding: 8px 0;
+  margin-right: 20px;
+}
+
+.prod2bx {
+  margin-top: 3px;
+}
+
+.right_txt > p {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.right_txt > em {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.media_thumb {
+  position: relative;
+}
+
+.mlogo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 50px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 12.5px;
+  font-family: var(--shoopen-font-eng);
+  padding: 8px;
+}
+
+.mlogo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/******* section5 *******/
+.map_search_wrap {
+  position: relative;
+  background-color: #fff;
+}
+.tabbx {
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+}
+.tabbx > ul {
+  display: table;
+  width: 100%;
+}
+.tabbx > ul > li {
+  display: table-cell;
+  padding: 15px 0;
+  text-align: center;
+  cursor: pointer;
+}
+.txtbx {
+  background: #fdd000;
+  text-align: center;
+}
+.txt_title > b {
+  font-weight: 400;
+  font-size: 22px;
+}
+.txt_inner {
+  padding: 20px;
+}
+.txt_title {
+  margin-bottom: 15px;
+}
+.txt_cont {
+  position: relative;
+  width: 100%;
+  height: 45px;
+}
+.txt_cont input {
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px 15px;
+  height: 100%;
+}
+.contbx {
+  padding: 10px 15px 10px 0;
+}
+.cont_inner {
+  height: 360px;
+  overflow-y: scroll;
+  padding: 0 20px;
+}
+.cont_inner::-webkit-scrollbar {
+  width: 5px;
+}
+.cont_inner::-webkit-scrollbar-thumb {
+  background: #fdd000;
+  border-radius: 10px;
+}
+.cont_inner::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 10px;
+}
+.map_search {
+  width: 350px;
+  background: #fff;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+}
+.map_inner {
+  height: 100%;
+  width: 100%;
+}
+iframe {
+  height: 100%;
+  width: 100%;
+}
+.map_list {
+  height: 90vh;
+  width: 100%;
+}
+.cont_tit {
+  font-size: 16px;
+}
+.cont_info > p {
+  font-size: 14px;
+  opacity: 0.7;
+}
+.cont_inner li {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 10px 0px;
+  cursor: pointer;
+}
+/* 지점 상세정보 박스 */
+.map_info {
+  cursor: default;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(118, 129, 168);
+  width: 200px;
+  height: 212px;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.map_info > span {
+  position: absolute;
+  width: 11px;
+  height: 9px;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png) 0% 0% / 11px 9px no-repeat;
+  left: 94px;
+  top: 210px;
+}
+.map_info > .map_info_inner {
+  padding: 20px;
+  height: 100%;
+}
+.info_tit_bx {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+.info_tit_bx > h3 {
+  font-size: 18px;
+}
+.info_tit_bx > p {
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 5px 0;
+  color: #555;
+}
+.morebtn_bx {
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  background: #fdd000;
+}
+.morebtn_bx > em {
+  font-size: 14px;
+}
+.fa-magnifying-glass:before {
+  font-weight: 900;
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* 지역검색 클릭시 표시될 부분 */
+.txt_title2 {
+  margin-bottom: 15px;
+  text-align: center;
+  padding: 20px;
+  background: #fdd000;
+}
+
+.txt_title2 > b {
+  font-weight: 400;
+  font-size: 22px;
+}
+.locals {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+}
+.locals > h3 {
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 10px;
+  text-align: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  width: calc(1 / 2 * 100% - (1 - 1 / 2) * 10px);
+  font-size: 16px;
+}
