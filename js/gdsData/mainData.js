@@ -1,27 +1,3 @@
-// main sc2 special data
-const sData = {
-    "trend": {
-        image : "<img src='./images/main/special/ban1.jpg' alt='트렌드 샌들'/>",
-        tit: "TREND SANDAL",
-        desc: "더운 여름엔 시원한 아이템",
-    },
-    "picnic": {
-        image : "<img src='./images/main/special/ban2.jpg' alt='피크닉'/>",
-        tit : "SUMMER PICNIC",
-        desc : "청량함 가득한 싱그러운 일상",
-    },
-    "rain": {
-        image : "<img src='./images/main/special/ban3.jpg' alt='장마'/>",
-        tit : "IT'S RAINY DAY",
-        desc : "올 여름 가장 완벽한 장마 준비",
-    },
-    "ootd": {
-        image : "<img src='./images/main/special/ban4.jpg' alt='OOTD'/>",
-        tit : "SUPPORTERS 아임슈페너",
-        desc : "아임슈페너들의 OOTD",
-    },
-};
-
 // main sc3 media data
 const mData = [
     {
@@ -154,4 +130,4 @@ const mapData = [
     },
 ]
 
-export {sData, mData, mapData};
+export {mData, mapData};

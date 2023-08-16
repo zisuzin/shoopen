@@ -62,7 +62,7 @@ const mainData = {
             </dl>
             <dl class="mntit2">
                 <dd v-for="(n,i) in notelnb2" :key="i">
-                    <a href="#" @click.prevent="setNum2(i)">{{n}}</a>
+                    <a href="#" @click.prevent="setNum(i)">{{n}}</a>
                 </dd>
             </dl>
         </div>
@@ -82,12 +82,12 @@ const mainData = {
                             </div>
                             <div class="ntxt2">
                                 <span class="original-price">
-                                    <em>{{a.oprice}}</em>
+                                    <em>{{setComma(a.oprice)}}</em>
                                     <span v-if="a.oprice">원</span>
                                 </span>
                                 <br>
                                 <span class="discount-price">
-                                    <em>{{a.dprice}}</em>
+                                    <em>{{setComma(a.dprice)}}</em>
                                     <span>원</span>
                                 </span>
                                 <span class="percent-price" v-if="a.oprice && a.dprice">

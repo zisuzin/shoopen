@@ -45,15 +45,15 @@ const dtData = {
                                 <div class="price">
                                     <div class="txt-def">
                                         <em>
-                                            {{numberWithCommas($store.state.dtoprice)}}
+                                            {{setComma($store.state.dtoprice)}}
                                             <span v-if="$store.state.dtoprice">원</span>
                                         </em>
                                     </div>
                                     <div class="txt-dsc">
-                                        <em>{{numberWithCommas($store.state.dtdprice)}}</em>
+                                        <em>{{setComma($store.state.dtdprice)}}</em>
                                         <span>원</span>
                                         <span class="txt-percent">
-                                            <em>{{calculateDiscount($store.state.dtoprice, $store.state.dtdprice)}}</em>
+                                            <em>{{setDiscount($store.state.dtoprice, $store.state.dtdprice)}}</em>
                                         </span>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@ const dtData = {
                                             </label>
                                         </div>
                                         <div class="opt_price">
-                                            <strong>{{numberWithCommas($store.state.dtdprice)}}</strong>원
+                                            <strong>{{setComma($store.state.dtdprice)}}</strong>원
                                         </div>
                                         <span class="opt_del">
                                             <i class="fa-solid fa-xmark"></i>
@@ -121,7 +121,7 @@ const dtData = {
                             <div class="dttot_bx">
                                 <span class="tot_txt">총 합계</span>
                                 <span class="tot_price">
-                                    <strong>{{numberWithCommas(Number($store.state.dtdprice)*($store.state.result))}}</strong>
+                                    <strong>{{setComma(Number($store.state.dtdprice)*($store.state.result))}}</strong>
                                     원
                                 </span>
                             </div> 

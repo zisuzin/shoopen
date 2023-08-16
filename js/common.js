@@ -1,13 +1,14 @@
 // 스토어 불러오기
 import store from "./store.js";
 // 메인JS 불러오기
-import {bannerSwiper, specialCont, mediaCont, mapSearch} from "./main.js";
+import { bannerSwiper, mapSearch } from "./main.js";
+import { mData } from "./gdsData/mainData.js";
 // 페이지 데이터
-import footData from "./tempData/footerData.js";
-import mainData from "./tempData/mainData.js";
-import dtData from "./tempData/prodDetail.js";
+import footData from "./tempData/footerComp.js";
+import mainData from "./tempData/mainComp.js";
+import dtData from "./tempData/DetailComp.js";
 // 공통 데이터
-import comData from "./tempData/comData.js";
+import comData from "./tempData/comComp.js";
 // 더미 데이터들
 // 서브
 import womenData from "./gdsData/womenData.js";
@@ -42,6 +43,30 @@ if (saveWish) {
   localStorage.setItem("ws_item", JSON.stringify(wishData));
   localStorage.setItem("ws_num", JSON.stringify(opnum));
 }
+//////////////////////////////////////////////////
+
+/************* 공통기능 함수 *************/
+const crossMixin = {
+  methods: {
+    // 세자리 콤마찍기 함수
+    setComma(val) {
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    // 배열 순번 셋업함수
+    setNum(pm) {
+      return (store.state.setNumber = pm);
+    },
+    // 정가/할인가 비교해서 할인율 계산 함수
+    setDiscount(oprice, dprice) {
+      // 정가와 할인가 중 하나라도 빈값이면 빈값 반환
+      if (!oprice || !dprice) {
+        return "";
+      }
+      const discount = ((oprice - dprice) / oprice) * 100;
+      return Math.floor(discount) + "%";
+    },
+  },
+};
 //////////////////////////////////////////////////
 
 /***************************************************** 
@@ -112,226 +137,217 @@ Vue.component("sub-comp", {
 // [2] 뷰컴포넌트 서브페이지 상품
 Vue.component("goods-comp", {
   template: `
-    <section>
-      <div class="container">
-      <div class="pagewrap" v-on="initSetSubSrc()">
-        <!-- 상단영역 -->
-          <div class="prd_top">
-            <!-- 타이틀 -->
-            <div class="cate_main_tit">
-              <h3 v-text="titSet().chgtit"></h3>
-              <span v-text="titSet().pm2"></span>
-              <!-- lnb 데이터 -->
-              <div class="catmenu">
-                <a href="#" v-on:click="setCatnum('전체')"><span>전체</span></a>
-                <a href="#" v-for="(v,n) in $store.state.setlnb" :key="n" v-on:click="setCatnum(v)"><span>{{v}}</span></a>
+      <div>
+        <div class="container">
+        <div class="pagewrap" v-on="initSetSubSrc()">
+          <!-- 상단영역 -->
+            <div class="prd_top">
+              <!-- 타이틀 -->
+              <div class="cate_main_tit">
+                <h3 v-text="titSet().chgtit"></h3>
+                <span v-text="titSet().pm2"></span>
+                <!-- lnb 데이터 -->
+                <div class="catmenu">
+                  <a href="#" v-on:click="setCatnum('전체')"><span>전체</span></a>
+                  <a href="#" v-for="(v,n) in $store.state.setlnb" :key="n" v-on:click="setCatnum(v)"><span>{{v}}</span></a>
+                </div>
               </div>
             </div>
-          </div>
-           <!-- 상품옵션 선택박스 -->
-            <div class="prd-cat-option">
-            <!-- 상품정렬 탭 -->
-                <ul class="option-left">
-                    <li class="filter_option" v-on:click="sortList('catnum')">
-                        <a href="#">신상품순</a>
-                    </li>
-                    <li class="filter_option" v-on:click="sortList('dprice')">
-                        <a href="#">낮은가격순</a>
-                    </li>
-                    <li class="filter_option" v-on:click="sortList('dprice')">
-                        <a href="#">높은가격순</a>
-                    </li>
-                    <li class="filter_option" v-on:click="sortList('review')">
-                        <a href="#">상품평순</a>
-                    </li>
-                </ul>
-                <div class="option-right">
-                    <!-- 상품카운트 박스 -->
-                    <div class="prd_count">
-                        <p>
-                        <strong>{{$store.state.pdlength}}</strong>
-                        items
-                        </p>
-                    </div>
-                    <!-- 상품필터 검색박스 -->
-                    <div class="prd_filter_bx">
-                        <button type="button">
-                            <span>필터</span>
-                        </button>
-                        <div class="filter_layer">
-                            <div class="filter_search">
-                                <table>
-                                    <colgroup>
-                                        <col style="width:100px"></col>
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th>사이즈</th>
-                                            <td>
-                                                <ul class="filter_size">
-                                                    <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].size" :key="i">
-                                                        <span class="chkbx">
-                                                            <input type="checkbox" id="depth_1"/>
-                                                            <span></span>
-                                                        </span>
-                                                        <label for="depth_1">{{v}}</label>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>색상</th>
-                                            <td>
-                                                <ul class="filter_color">
-                                                    <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].color" :key="i">
-                                                        <div>
-                                                            <button type="button" :style="{ backgroundColor: v.split('^')[0] }"></button>
-                                                            <span>{{v.split('^')[1]}}</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>가격</th>
-                                            <td>
-                                                <div class="filter_price">
-                                                    <div class="slider">
-                                                        <div class="progress"></div>
-                                                        <div class="range_input">
-                                                            <input type="range" min="0" max="100" value="0" step="20" class="ui_slider_start"></input>
-                                                            <input type="range" min="0" max="100" value="100" step="20" class="ui_slider_end"></input>
-                                                        </div>
-                                                        </div>
-                                                    <div id="filter_price_view">
-                                                        <input class="input_min" type="number" value="0" v-on:click="calcMoveSl()"/>
-                                                        만원 ~
-                                                        <input class="input_max" type="number" value="100" v-on:click="calcMoveSl()"/>
-                                                        만원
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> 
-                            <div class="btn_wrap">
-                                <a href="#" class="btn_style01">초기화</a>
-                                <a href="#" class="btn_style02">검색</a>
-                            </div>
-                            <button type="button" class="close_btn" title="필터 닫기">
-                                <span>필터</span>
-                            </button>
-                        </div>
-                    </div>
+             <!-- 상품옵션 선택박스 -->
+              <div class="prd-cat-option">
+              <!-- 상품정렬 탭 -->
+                  <ul class="option-left">
+                      <li class="filter_option" v-on:click="sortList('catnum')">
+                          <a href="#">신상품순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('dprice')">
+                          <a href="#">낮은가격순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('dprice')">
+                          <a href="#">높은가격순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('review')">
+                          <a href="#">상품평순</a>
+                      </li>
+                  </ul>
+                  <div class="option-right">
+                      <!-- 상품카운트 박스 -->
+                      <div class="prd_count">
+                          <p>
+                          <strong>{{$store.state.pdlength}}</strong>
+                          items
+                          </p>
+                      </div>
+                      <!-- 상품필터 검색박스 -->
+                      <div class="prd_filter_bx">
+                          <button type="button">
+                              <span>필터</span>
+                          </button>
+                          <div class="filter_layer">
+                              <div class="filter_search">
+                                  <table>
+                                      <colgroup>
+                                          <col style="width:100px"></col>
+                                      </colgroup>
+                                      <tbody>
+                                          <tr>
+                                              <th>사이즈</th>
+                                              <td>
+                                                  <ul class="filter_size">
+                                                      <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].size" :key="i">
+                                                          <span class="chkbx">
+                                                              <input type="checkbox" id="depth_1"/>
+                                                              <span></span>
+                                                          </span>
+                                                          <label for="depth_1">{{v}}</label>
+                                                      </li>
+                                                  </ul>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <th>색상</th>
+                                              <td>
+                                                  <ul class="filter_color">
+                                                      <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].color" :key="i">
+                                                          <div>
+                                                              <button type="button" :style="{ backgroundColor: v.split('^')[0] }"></button>
+                                                              <span>{{v.split('^')[1]}}</span>
+                                                          </div>
+                                                      </li>
+                                                  </ul>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <th>가격</th>
+                                              <td>
+                                                  <div class="filter_price">
+                                                      <div class="slider">
+                                                          <div class="progress"></div>
+                                                          <div class="range_input">
+                                                              <input type="range" min="0" max="100" value="0" step="20" class="ui_slider_start"></input>
+                                                              <input type="range" min="0" max="100" value="100" step="20" class="ui_slider_end"></input>
+                                                          </div>
+                                                          </div>
+                                                      <div id="filter_price_view">
+                                                          <input class="input_min" type="number" value="0" v-on:click="calcMoveSl()"/>
+                                                          만원 ~
+                                                          <input class="input_max" type="number" value="100" v-on:click="calcMoveSl()"/>
+                                                          만원
+                                                      </div>
+                                                  </div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div class="btn_wrap">
+                                  <a href="#" class="btn_style01">초기화</a>
+                                  <a href="#" class="btn_style02">검색</a>
+                              </div>
+                              <button type="button" class="close_btn" title="필터 닫기">
+                                  <span>필터</span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            <!-- 상품리스트 박스 -->
+            <div class="prdbx">
+              <div class="prdwrap">
+                  <!-- 상품리스트 -->
+                    <ul class="ui-col4">
+                      <template v-for="(v,i) in prdData[dataNum()]">
+                          <template v-for="(a,b) in prdData[dataNum()][i]" v-if="b === $store.state.curUrl2 || $store.state.curUrl2 === '전체'">
+                              <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
+                                  <div class="ui-prod-bx">
+                                      <a href="#">
+                                          <div class="prod-detail-img">
+                                              <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
+                                          </div>
+                                      </a>
+                                      <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                                          <button type="button" class="fa-solid fa-heart"></button>
+                                      </div>
+                                  </div>
+                                  <div class="item-detail">
+                                      <div class="prod-txt">
+                                          <strong class="brand">슈펜</strong>
+                                          <p>{{x.name}}</p>
+                                      </div>
+                                      <span class="original-price">
+                                          <em>{{setComma(x.oprice)}}</em>
+                                          <span v-if="x.oprice">원</span>
+                                      </span>
+                                      <br>
+                                      <span class="discount-price">
+                                          <em>{{setComma(x.dprice)}}</em>
+                                          <span>원</span>
+                                      </span>
+                                      <span class="percent-price" v-if="x.oprice && x.dprice">
+                                          <em>{{setDiscount(x.oprice,x.dprice)}}</em>
+                                      </span>
+                                      <div class="box_grade">
+                                          <div class="star">
+                                              <span v-if="x.review">{{'(' + x.review + ')'}}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </template>
+                          <template v-for="(a,b) in prdData[dataNum()][i]" v-else-if="b === $store.state.catnum || $store.state.catnum === '전체'">
+                              <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
+                                  <div class="ui-prod-bx">
+                                      <a href="#">
+                                          <div class="prod-detail-img">
+                                              <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
+                                          </div>
+                                      </a>
+                                      <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                                          <button type="button" class="fa-solid fa-heart"></button>
+                                      </div>
+                                  </div>
+                                  <div class="item-detail">
+                                      <div class="prod-txt">
+                                          <strong class="brand">슈펜</strong>
+                                          <p>{{x.name}}</p>
+                                      </div>
+                                      <span class="original-price">
+                                          <em>{{setComma(x.oprice)}}</em>
+                                          <span v-if="x.oprice">원</span>
+                                      </span>
+                                      <br>
+                                      <span class="discount-price">
+                                          <em>{{setComma(x.dprice)}}</em>
+                                          <span>원</span>
+                                      </span>
+                                      <span class="percent-price" v-if="x.oprice && x.dprice">
+                                          <em>{{setDiscount(x.oprice,x.dprice)}}</em>
+                                      </span>
+                                      <div class="box_grade">
+                                          <div class="star">
+                                              <span v-if="x.review">{{'(' + x.review + ')'}}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </template>
+                      </template>
+                    </ul>
                 </div>
             </div>
-          <!-- 상품리스트 박스 -->
-          <div class="prdbx">
-            <div class="prdwrap">
-                <!-- 상품리스트 -->
-                  <ul class="ui-col4">
-                    <template v-for="(v,i) in prdData[dataNum()]">
-                        <template v-for="(a,b) in prdData[dataNum()][i]" v-if="b === $store.state.curUrl2 || $store.state.curUrl2 === '전체'">
-                            <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
-                                <div class="ui-prod-bx">
-                                    <a href="#">
-                                        <div class="prod-detail-img">
-                                            <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
-                                        </div>
-                                    </a>
-                                    <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
-                                        <button type="button" class="fa-solid fa-heart"></button>
-                                    </div>
-                                </div>
-                                <div class="item-detail">
-                                    <div class="prod-txt">
-                                        <strong class="brand">슈펜</strong>
-                                        <p>{{x.name}}</p>
-                                    </div>
-                                    <span class="original-price">
-                                        <em>{{numberWithCommas(x.oprice)}}</em>
-                                        <span v-if="x.oprice">원</span>
-                                    </span>
-                                    <br>
-                                    <span class="discount-price">
-                                        <em>{{numberWithCommas(x.dprice)}}</em>
-                                        <span>원</span>
-                                    </span>
-                                    <span class="percent-price" v-if="x.oprice && x.dprice">
-                                        <em>{{calculateDiscount(x.oprice,x.dprice)}}</em>
-                                    </span>
-                                    <div class="box_grade">
-                                        <div class="star">
-                                            <span v-if="x.review">{{'(' + x.review + ')'}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </template>
-
-                        <template v-for="(a,b) in prdData[dataNum()][i]" v-else-if="b === $store.state.catnum || $store.state.catnum === '전체'">
-                            <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
-                                <div class="ui-prod-bx">
-                                    <a href="#">
-                                        <div class="prod-detail-img">
-                                            <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
-                                        </div>
-                                    </a>
-                                    <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
-                                        <button type="button" class="fa-solid fa-heart"></button>
-                                    </div>
-                                </div>
-                                <div class="item-detail">
-                                    <div class="prod-txt">
-                                        <strong class="brand">슈펜</strong>
-                                        <p>{{x.name}}</p>
-                                    </div>
-                                    <span class="original-price">
-                                        <em>{{numberWithCommas(x.oprice)}}</em>
-                                        <span v-if="x.oprice">원</span>
-                                    </span>
-                                    <br>
-                                    <span class="discount-price">
-                                        <em>{{numberWithCommas(x.dprice)}}</em>
-                                        <span>원</span>
-                                    </span>
-                                    <span class="percent-price" v-if="x.oprice && x.dprice">
-                                        <em>{{calculateDiscount(x.oprice,x.dprice)}}</em>
-                                    </span>
-                                    <div class="box_grade">
-                                        <div class="star">
-                                            <span v-if="x.review">{{'(' + x.review + ')'}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </template>
-                    </template>
-                  </ul>
-              </div>
-          </div>
+        </div>
+        </div>
+        <!-- 여기부터 디테일페이지! -->
+        <dt-comp></dt-comp>
       </div>
-      </div>
-      <!-- 여기부터 디테일페이지! -->
-      <dt-comp></dt-comp>
-    </section>
   `,
-  provide: function () {
-    return {
-      // dt-comp에 전달할 메서드들
-      numberWithCommas: this.numberWithCommas,
-      calculateDiscount: this.calculateDiscount,
-      plusBtn: this.plusBtn,
-      minusBtn: this.minusBtn,
-    };
-  },
   data() {
     return {
       // 외부 더미 데이터들
       prdData: [womenData, menData, kidsData],
     };
   },
+  mixins: [crossMixin],
   methods: {
     // 카트 추가 메서드
     addWish(pm, idx, cnt) {
@@ -390,19 +406,6 @@ Vue.component("goods-comp", {
       // 분기한 결과값 뱉어내기!
       return result;
     },
-    // 정규식함수(숫자 세자리마다 콤마해주는 기능)
-    numberWithCommas: function (x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-    // 정가/할인가 비교해서 할인율 계산
-    calculateDiscount: function (oprice, dprice) {
-      // 정가와 할인가 중 하나라도 빈값이면 빈값 반환
-      if (!oprice || !dprice) {
-        return "";
-      }
-      const discount = ((oprice - dprice) / oprice) * 100;
-      return Math.floor(discount) + "%";
-    },
     // 타이틀 셋팅
     titSet() {
       // left영역 상단타이틀 변경
@@ -436,23 +439,6 @@ Vue.component("goods-comp", {
 
       // 디테일박스 열기
       $(".dt-comp").css("display", "block");
-    },
-    // 더하기함수
-    plusBtn: function () {
-      let num = $(".opt_num input").val();
-      num++;
-      // 업데이트
-      $(".opt_num input").val(num);
-      store.state.result = num;
-    },
-    // 빼기함수
-    minusBtn: function () {
-      let num = $(".opt_num input").val();
-      num--;
-      if (num === 0) return;
-      // 업데이트
-      $(".opt_num input").val(num);
-      store.state.result = num;
     },
     // 정렬 기능 메서드
     sortList(pm) {
@@ -648,8 +634,8 @@ Vue.component("goods-comp", {
 
 // [5] 뷰컴포넌트 - 상품디테일
 Vue.component("dt-comp", {
-  inject: ["numberWithCommas", "calculateDiscount", "plusBtn", "minusBtn"],
   template: dtData.dtComp,
+  mixins: [crossMixin],
   methods: {
     // 카테고리 보이기 메서드
     openCat() {
@@ -701,6 +687,23 @@ Vue.component("dt-comp", {
           }); // op2t click
         }); // opt1 li click
     },
+    // 더하기함수
+    plusBtn() {
+        let num = $(".opt_num input").val();
+        num++;
+        // 업데이트
+        $(".opt_num input").val(num);
+        store.state.result = num;
+    },
+    // 빼기함수
+      minusBtn() {
+        let num = $(".opt_num input").val();
+        num--;
+        if (num === 0) return;
+        // 업데이트
+        $(".opt_num input").val(num);
+        store.state.result = num;
+    },
     // 디테일페이지 닫기 메서드
     closeDetail() {
       // 상품 디테일박스 & 상품 옵션 박스 & 최종 결제가 박스 닫힘
@@ -712,14 +715,6 @@ Vue.component("dt-comp", {
     },
   }, ///////////// methods /////////////////
   mounted() {
-    // 부모 컴포넌트에게서 전달받은 메서드 호출!
-    if (typeof this.numberWithCommas && this.calculateDiscount && this.plusBtn && this.minusBtn === "function") {
-      this.numberWithCommas();
-      this.calculateDiscount();
-      this.plusBtn();
-      this.minusBtn();
-    }
-
     // 상품 상세페이지 스와이퍼 배너
     const swiper2 = new Swiper(".mySwiper2", {
       loop: true,
@@ -769,6 +764,7 @@ Vue.component("side-comp", {
 // [6] 뷰컴포넌트 - 위시리스트
 Vue.component("wish-comp", {
   template: comData.wishComp,
+  mixins: [crossMixin],
   methods: {
     delWish(tgNum) {
       console.log("삭제!!");
@@ -790,9 +786,7 @@ Vue.component("wish-comp", {
     wishClose() {
       $(".wish_comp").removeClass("show");
     },
-    numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
+    // 더하기 함수
     minusBtn(cnt) {
       let tg = event.currentTarget;
       let num = $(tg).siblings().eq(1).find("input").val();
@@ -805,6 +799,7 @@ Vue.component("wish-comp", {
       // 수량 업데이트
       $(tg).siblings().eq(1).find("input").val(num);
     },
+    // 빼기 함수
     plusBtn(cnt) {
       let tg = event.currentTarget;
       let num = $(tg).siblings().eq(1).find("input").val();
@@ -941,22 +936,13 @@ Vue.component("foot-comp", {
 // [10] 뷰컴포넌트 - 메인 섹션2 베스트상품 컴포넌트
 Vue.component("mb-comp", {
   template: mainData.bestarea,
+  mixins: [crossMixin],
   data() {
     return {
       // 외부 더미 데이터
       m_bestData: m_bestData,
       notelnb: ["#1만원대 특가 신발", "#버킷햇", "#썸머 슈즈"],
     };
-  },
-  methods: {
-    // instance 배열 순번 셋업함수 호출
-    setNum(val) {
-      return this.$root.chgList(val);
-    },
-    // instance 세자리콤마함수 호출
-    setComma(val) {
-      return this.$root.numberWithCommas(val);
-    },
   },
   mounted() {
     // 첫번째 dd에 강제 클릭
@@ -971,38 +957,88 @@ Vue.component("mb-comp", {
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
 
+// [11] 뷰컴포넌트 - 메인 섹션3 미디어 컴포넌트
+Vue.component("med-comp", {
+  template: `
+        <li class="swiper-slide">
+            <a href="#">
+                <!-- 썸네일 출력 영역 -->
+                <div class="media_thumb">
+                    <img v-bind:src="tumbimg" alt="대표썸네일"/>
+                    <span class="mlogo">
+                        <img src="./images/logo/logo_y.jpg" alt="sns계정명"/>
+                        shoopen_official
+                    </span>
+                </div>
+                <div class="media_depth">
+                    <!-- 상품1 출력 영역 -->
+                    <div class="prod1bx">
+                        <div class="left_img">
+                            <img v-bind:src="dpt1img" alt="상품이미지1"/>
+                        </div>
+                        <div class="right_txt">
+                            <p>{{dpt1name}}</p>
+                            <em>{{setComma(dpt1price)}}</em>
+                        </div>
+                    </div>
+                    <!-- 상품2 출력 영역 -->
+                    <div class="prod2bx">
+                        <div class="left_img">
+                            <img v-bind:src="dpt2img" alt="상품이미지2"/>
+                        </div>
+                        <div class="right_txt">
+                            <p>{{dpt2name}}</p>
+                            <em>{{setComma(dpt2price)}}</em>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+  `,
+  mixins: [crossMixin],
+  props: ["matchmedia", "dpt1val", "dpt2val"],
+  data: function () {
+    return {
+      tumbimg: `./images/main/media/thumb/${this.matchmedia.thumbImg}`,
+      dpt1img: `./images/main/media/depth1/${this.dpt1val[0]}`,
+      dpt1name: this.dpt1val[1],
+      dpt1price: this.dpt1val[2],
+      dpt2img: `./images/main/media/depth2/${this.dpt2val[0]}`,
+      dpt2name: this.dpt2val[1],
+      dpt2price: this.dpt2val[2],
+    };
+  },
+  mounted() {
+    let banSwiper = new Swiper(".mSwiper3", {
+      slidesPerView: 4,
+      slidesPerGroup: 1,
+    });
+  },
+});
+
 // [11] 뷰컴포넌트 - 메인 섹션4 신제품 컴포넌트
 Vue.component("mn-comp", {
   template: mainData.newarea,
+  mixins: [crossMixin],
   data() {
     return {
       // 외부 더미데이터
       m_newData: m_newData,
       notelnb2: ["WOMEN", "MEN", "KIDS"],
-    }
-  },
-  methods: {
-    // instance 배열 순번 셋업함수 호출
-    setNum2(val) {
-      return this.$root.chgList(val);
-    },
-    // instance 세자리콤마함수 호출
-    setComma2(val) {
-      return this.$root.numberWithCommas(val);
-    },
+    };
   },
   mounted() {
     // 첫번째 dd에 강제 클릭
     $(".mntit2 > dd:first").addClass("on").siblings().removeClass("on").trigger("click");
     // 첫번째 dd 클릭시 데이터만 우선 보이기
     const index = $(".mntit2 > dd:first").index();
-    this.setNum2(index);
+    this.setNum(index);
     // 클릭한 dd에만 on 넣기
     $(".mntit2 > dd").click(function () {
       $(this).addClass("on").siblings().removeClass("on");
     });
   },
-})
+});
 
 /********************************************* 
     뷰인스턴스 생성영역
@@ -1043,6 +1079,7 @@ new Vue({
         $(".callout").css({ display: "none" });
       }
     }
+    // 위시데이터 셋팅 함수
     initWishNum();
   }, ////////// mounted ///////////
 }); ////////////////// Vue 인스턴스 //////////////////////
@@ -1051,16 +1088,9 @@ new Vue({
 new Vue({
   el: "#cont",
   store,
-  methods: {
-    // 하위 컴포넌트에서 접근하기 위해 인스턴스에 등록 !!
-    // 세자리 콤마 함수
-    numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-    // 배열데이터 순번 셋업해주는 메서드
-    chgList(pm) {
-      store.state.setNumber = pm;
-    },
+  data: {
+    // 메인 미디어섹션 데이터
+    mData: mData,
   },
   mounted() {
     // lnb 메뉴 클릭시 클래스 on 추가/제거
@@ -1109,13 +1139,7 @@ new Vue({
     // 최초호출!
     initCatnum();
     // 메인 배너 함수
-    bannerSwiper();
-    // sc2 배너 함수
-    specialCont();
-    // sc4 배너 함수
-    mediaCont();
-    // sc5 매장 검색 함수
-    mapSearch();
+    // bannerSwiper();
   }, ////////////// mounted ////////////////////
 }); ////////////////// Vue 인스턴스 //////////////////////
 

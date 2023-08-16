@@ -266,47 +266,6 @@
     font-size: min(5vw, 1.3rem);
 }
 
-/* 최종 결제 옵션수량 */
-.opt_num{
-    position: relative;
-    width: 83px;
-    height: 100%;
-    font-size: 0;
-    border: 1px solid #999;
-}
-
-/* 옵션수량 증감버튼 */
-.opt_num > .minus {
-    position: absolute;
-    left: 0;
-    width: 21px;
-    height: 21px;
-    border-right: 1px solid #999;
-    background: url(../images/icon/ico_detail_all.png) no-repeat -227px -20px;
-}
-
-.opt_num > .plus {
-    position: absolute;
-    right: 0;
-    width: 21px;
-    height: 21px;
-    border-left: 1px solid #999;
-    background: url(../images/icon/ico_detail_all.png) no-repeat -245px -20px;;
-}
-
-.opt_num input[type="number"]::-webkit-outer-spin-button,
-.opt_num input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-.opt_num .num {
-    width: 100%;
-    height: 21px;
-    text-align: center;
-    border: 0;
-    font-size: min(5vw, 1.2rem);
-}
-
 /* 최종 결제 옵션별 가격 */
 .dtfinal_bx li > .opt_price {
     width: 120px;

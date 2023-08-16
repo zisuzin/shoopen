@@ -372,7 +372,7 @@ tr > th:nth-child(3) {
 }
 
 /* 최종 결제 옵션수량 */
-.ws_num {
+.opt_num {
   position: relative;
   width: 83px;
   height: 100%;
@@ -381,7 +381,7 @@ tr > th:nth-child(3) {
 }
 
 /* 옵션수량 증감버튼 */
-.ws_num > .minus {
+.opt_num > .minus {
   position: absolute;
   left: 0;
   width: 21px;
@@ -390,22 +390,21 @@ tr > th:nth-child(3) {
   background: url(../images/icon/ico_detail_all.png) no-repeat -227px -20px;
 }
 
-.ws_num > .plus {
+.opt_num > .plus {
   position: absolute;
   right: 0;
   width: 21px;
   height: 21px;
   border-left: 1px solid #999;
-  background: url(../images/icon/ico_detail_all.png) no-repeat -245px -20px;
+  background: url(../images/icon/ico_detail_all.png) no-repeat -245px -20px;;
 }
 
-/* 수량 조절 버튼 */
-.ws_num input[type="number"]::-webkit-outer-spin-button,
-.ws_num input[type="number"]::-webkit-inner-spin-button {
+.opt_num input[type="number"]::-webkit-outer-spin-button,
+.opt_num input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-.ws_num .num {
+.opt_num .num {
   width: 100%;
   height: 21px;
   text-align: center;

@@ -49,7 +49,29 @@
         <!-- section1 : 배너영역 -->
         <section id="main_banner">
           <div class="mSwiper mySwiper">
-            <ul class="swiper-wrapper main_bannerwrap"></ul>
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_1.jpg" alt="배너이미지1">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_2.jpg" alt="배너이미지2">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_3.jpg" alt="배너이미지3">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_4.jpg" alt="배너이미지4">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_5.jpg" alt="배너이미지5">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_6.jpg" alt="배너이미지6">
+                </li>
+                <li class="swiper-slide">
+                    <img src="./images/main/front/pc_7.jpg" alt="배너이미지7">
+                </li>
+            </ul>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <button type="button" class="swiper-btn-toggle"></button>
@@ -62,21 +84,66 @@
         <mb-comp></mb-comp>
         <!-- section3 : special -->
         <section class="main_special">
-          <div class="mstit_bx">
-            <dl class="mstit">
-              <dt class="main_tit">Magazine</dt>
-              <dd class="morebtn">
+            <div class="mstit">
+              <h3 class="main_tit">Magazine</h3>
+              <div class="morebtn">
                 <a href="#">전체보기</a>
-              </dd>
-            </dl>
-          </div>
-          <div class="msWrap"></div>
+              </div>
+            </div>
+            <div class="msWrap">
+                <div class="msList">
+                    <figure>
+                        <div class="special-img">
+                            <img src="./images/main/special/ban1.jpg" alt="트렌드 샌들"/>
+                        </div>
+                    </figure>
+                    <figcaption>
+                        <h4 class="special-tit">TREND SANDAL</h4>
+                        <p class="special-desc">더운 여름엔 시원한 아이템</p>
+                    </figcaption>
+                </div>
+                <div class="msList">
+                    <figure>
+                        <div class="special-img">
+                            <img src="./images/main/special/ban2.jpg" alt="피크닉"/>
+                        </div>
+                    </figure>
+                    <figcaption>
+                        <h4 class="special-tit">SUMMER PICNIC</h4>
+                        <p class="special-desc">청량함 가득한 싱그러운 일상</p>
+                    </figcaption>
+                </div>
+                <div class="msList">
+                    <figure>
+                        <div class="special-img">
+                            <img src="./images/main/special/ban3.jpg" alt="장마"/>
+                        </div>
+                    </figure>
+                    <figcaption>
+                        <h4 class="special-tit">IT'S RAINY DAY</h4>
+                        <p class="special-desc">올 여름 가장 완벽한 장마 준비</p>
+                    </figcaption>
+                </div>
+                <div class="msList">
+                    <figure>
+                        <div class="special-img">
+                            <img src="./images/main/special/ban4.jpg" alt="OOTD"/>
+                        </div>
+                    </figure>
+                    <figcaption>
+                        <h4 class="special-tit">SUPPORTERS 아임슈페너</h4>
+                        <p class="special-desc">아임슈페너들의 OOTD</p>
+                    </figcaption>
+                </div>
+            </div>
         </section>
         <!-- section3 : media -->
         <section class="main_media">
-          <div class="media_wrap mSwiper3 mySwiper">
+          <div class="mSwiper3 mySwiper media_wrap">
             <h3>MEDIA</h3>
-            <ul class="swiper-wrapper"></ul>
+            <ul class="swiper-wrapper">
+                <med-comp v-for="(v,i) in mData" :key="i" :matchmedia="v" :dpt1val="v.depth1" :dpt2val="v.depth2"></med-comp>
+            </ul>
           </div>
         </section>
         <!-- section4 : new -->

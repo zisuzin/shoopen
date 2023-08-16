@@ -247,12 +247,12 @@ main {
 }
 
 /******* section3 *******/
-.media_wrap > ul {
+.mSwiper3> ul {
   display: flex;
   gap: 0 2px;
 }
 
-.media_wrap > h3,
+.mSwiper3> h3,
 .storetit > h2 {
   font-size: 30px;
   padding-bottom: 30px;

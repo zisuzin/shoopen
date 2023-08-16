@@ -29,10 +29,10 @@ const comData = {
                                     <p>{{v[1]}}</p>
                                 </div>
                                 <span class="ws_price">
-                                    <em>{{numberWithCommas(v[2])}}</em>
+                                    <em>{{setComma(v[2])}}</em>
                                     <span>원</span>
                                 </span>
-                                <div class="ws_num">
+                                <div class="opt_num">
                                     <a href="#" role="button" class="minus" v-on:click.prevent="minusBtn(i)">수량감소</a>
                                     <a href="#" role="button" class="plus" v-on:click.prevent="plusBtn(i)">수량증가</a>
                                     <label>
