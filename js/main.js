@@ -24,57 +24,6 @@ function bannerSwiper() {
   }); 
 } // bannerSwiper
 
-// 메인 section3 배너 함수
-// function mediaCont() {
-//     const mediaP = document.querySelector(".media_wrap ul");
-//     let hcode = "";
-//     for(let item in mData) {
-//         hcode+= `
-//             <li class="swiper-slide">
-//             <a href="#">
-//                 <!-- 썸네일 출력 영역 -->
-//                 <div class="media_thumb">
-//                     <img src="./images/main/media/thumb/${mData[item].thumbImg}" alt="sns썸네일"/>
-//                     <span class="mlogo">
-//                         <img src="./images/logo/logo_y.jpg" alt="sns계정명"/>
-//                         shoopen_official
-//                     </span>
-//                 </div>
-//                 <div class="media_depth">
-//                     <!-- 상품1 출력 영역 -->
-//                     <div class="prod1bx">
-//                         <div class="left_img">
-//                             <img src="./images/main/media/depth1/${mData[item].depth1[0]}" alt="상품이미지1"/>
-//                         </div>
-//                         <div class="right_txt">
-//                             <p>${mData[item].depth1[1]}</p>
-//                             <em>${mData[item].depth1[2]}</em>
-//                         </div>
-//                     </div>
-//                     <!-- 상품2 출력 영역 -->
-//                     <div class="prod2bx">
-//                         <div class="left_img">
-//                             <img src="./images/main/media/depth2/${mData[item].depth2[0]}" alt="상품이미지1"/>
-//                         </div>
-//                         <div class="right_txt">
-//                             <p>${mData[item].depth2[1]}</p>
-//                             <em>${mData[item].depth2[2]}</em>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </a>
-//         </li>
-//         `
-
-//         // 스와이퍼 커스텀 
-//         let banSwiper = new Swiper(".mSwiper3", {
-//             slidesPerView: 4,
-//             slidesPerGroup: 1, 
-//         });
-//     };
-//     mediaP.innerHTML = hcode;
-// };
-
 // 메인 section5 매장 검색 함수
 function mapSearch() {
     $(".tabbx li").click(function() {
@@ -141,7 +90,7 @@ function mapSearch() {
         // 중분류 지역 데이터 출력 함수
         function clkTumb(e) {
             const locName = $(e.currentTarget).text();
-            console.log(locName)
+            // console.log(locName)
             switch(locName) {
                 case "서울": 
                     renderSeoul();
