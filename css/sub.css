@@ -434,6 +434,12 @@ main {
     opacity: 0;
 }
 
+/* 클래스 on */
+.product_like.on > button {
+    color: #ff4465;
+    border: 1px solid #ff4465;
+}
+
 .ui-prod-bx .prod-txt > strong {
     font-size: min(1.3rem,2vw);
 }

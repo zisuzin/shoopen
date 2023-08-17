@@ -1,7 +1,6 @@
 // 스토어 불러오기
 import store from "./store.js";
 // 메인JS 불러오기
-import { bannerSwiper, mapSearch } from "./main.js";
 import { mData } from "./gdsData/mainData.js";
 // 페이지 데이터
 import footData from "./tempData/footerComp.js";
@@ -178,77 +177,6 @@ Vue.component("goods-comp", {
                           items
                           </p>
                       </div>
-                      <!-- 상품필터 검색박스 -->
-                      <div class="prd_filter_bx">
-                          <button type="button">
-                              <span>필터</span>
-                          </button>
-                          <div class="filter_layer">
-                              <div class="filter_search">
-                                  <table>
-                                      <colgroup>
-                                          <col style="width:100px"></col>
-                                      </colgroup>
-                                      <tbody>
-                                          <tr>
-                                              <th>사이즈</th>
-                                              <td>
-                                                  <ul class="filter_size">
-                                                      <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].size" :key="i">
-                                                          <span class="chkbx">
-                                                              <input type="checkbox" id="depth_1"/>
-                                                              <span></span>
-                                                          </span>
-                                                          <label for="depth_1">{{v}}</label>
-                                                      </li>
-                                                  </ul>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th>색상</th>
-                                              <td>
-                                                  <ul class="filter_color">
-                                                      <li v-for="(v,i) in $store.state.gnb[$store.state.curUrl0][$store.state.curUrl1][$store.state.curUrl2].color" :key="i">
-                                                          <div>
-                                                              <button type="button" :style="{ backgroundColor: v.split('^')[0] }"></button>
-                                                              <span>{{v.split('^')[1]}}</span>
-                                                          </div>
-                                                      </li>
-                                                  </ul>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th>가격</th>
-                                              <td>
-                                                  <div class="filter_price">
-                                                      <div class="slider">
-                                                          <div class="progress"></div>
-                                                          <div class="range_input">
-                                                              <input type="range" min="0" max="100" value="0" step="20" class="ui_slider_start"></input>
-                                                              <input type="range" min="0" max="100" value="100" step="20" class="ui_slider_end"></input>
-                                                          </div>
-                                                          </div>
-                                                      <div id="filter_price_view">
-                                                          <input class="input_min" type="number" value="0" v-on:click="calcMoveSl()"/>
-                                                          만원 ~
-                                                          <input class="input_max" type="number" value="100" v-on:click="calcMoveSl()"/>
-                                                          만원
-                                                      </div>
-                                                  </div>
-                                              </td>
-                                          </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                              <div class="btn_wrap">
-                                  <a href="#" class="btn_style01">초기화</a>
-                                  <a href="#" class="btn_style02">검색</a>
-                              </div>
-                              <button type="button" class="close_btn" title="필터 닫기">
-                                  <span>필터</span>
-                              </button>
-                          </div>
-                      </div>
                   </div>
               </div>
             <!-- 상품리스트 박스 -->
@@ -256,81 +184,42 @@ Vue.component("goods-comp", {
               <div class="prdwrap">
                   <!-- 상품리스트 -->
                     <ul class="ui-col4">
-                      <template v-for="(v,i) in prdData[dataNum()]">
-                          <template v-for="(a,b) in prdData[dataNum()][i]" v-if="b === $store.state.curUrl2 || $store.state.curUrl2 === '전체'">
-                              <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
-                                  <div class="ui-prod-bx">
-                                      <a href="#">
-                                          <div class="prod-detail-img">
-                                              <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
-                                          </div>
-                                      </a>
-                                      <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
-                                          <button type="button" class="fa-solid fa-heart"></button>
-                                      </div>
-                                  </div>
-                                  <div class="item-detail">
-                                      <div class="prod-txt">
-                                          <strong class="brand">슈펜</strong>
-                                          <p>{{x.name}}</p>
-                                      </div>
-                                      <span class="original-price">
-                                          <em>{{setComma(x.oprice)}}</em>
-                                          <span v-if="x.oprice">원</span>
-                                      </span>
-                                      <br>
-                                      <span class="discount-price">
-                                          <em>{{setComma(x.dprice)}}</em>
-                                          <span>원</span>
-                                      </span>
-                                      <span class="percent-price" v-if="x.oprice && x.dprice">
-                                          <em>{{setDiscount(x.oprice,x.dprice)}}</em>
-                                      </span>
-                                      <div class="box_grade">
-                                          <div class="star">
-                                              <span v-if="x.review">{{'(' + x.review + ')'}}</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                          </template>
-                          <template v-for="(a,b) in prdData[dataNum()][i]" v-else-if="b === $store.state.catnum || $store.state.catnum === '전체'">
-                              <li v-for="(x,y) in a" :key="y" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave" v-on:click="getData(prdData[dataNum()][i], y)">
-                                  <div class="ui-prod-bx">
-                                      <a href="#">
-                                          <div class="prod-detail-img">
-                                              <img v-bind:src="'./images/goods/' + $store.state.curUrl0 + '/' + i + '/' + x.img + '.jpg'" alt="상품이미지">
-                                          </div>
-                                      </a>
-                                      <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
-                                          <button type="button" class="fa-solid fa-heart"></button>
-                                      </div>
-                                  </div>
-                                  <div class="item-detail">
-                                      <div class="prod-txt">
-                                          <strong class="brand">슈펜</strong>
-                                          <p>{{x.name}}</p>
-                                      </div>
-                                      <span class="original-price">
-                                          <em>{{setComma(x.oprice)}}</em>
-                                          <span v-if="x.oprice">원</span>
-                                      </span>
-                                      <br>
-                                      <span class="discount-price">
-                                          <em>{{setComma(x.dprice)}}</em>
-                                          <span>원</span>
-                                      </span>
-                                      <span class="percent-price" v-if="x.oprice && x.dprice">
-                                          <em>{{setDiscount(x.oprice,x.dprice)}}</em>
-                                      </span>
-                                      <div class="box_grade">
-                                          <div class="star">
-                                              <span v-if="x.review">{{'(' + x.review + ')'}}</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                          </template>
+                      <template v-for="(v,i) in $store.state.imgpath">
+                            <li v-for="(a,b) in v" v-if="$store.state.curUrl2 === i || $store.state.curUrl2 === '전체'" :key="a.name" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave">
+                                <div class="ui-prod-bx">
+                                    <a href="#">
+                                        <div class="prod-detail-img">
+                                            <img :src="'./images/goods/'+$store.state.curUrl0+'/'+a.img+'.jpg'" :alt="a.name">
+                                        </div>
+                                    </a>
+                                    <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                                        <button type="button" class="fa-solid fa-heart"></button>
+                                    </div>
+                                </div>
+                                <div class="item-detail">
+                                    <div class="prod-txt">
+                                        <strong class="brand">슈펜</strong>
+                                        <p>{{a.name}}</p>
+                                    </div>
+                                    <span class="original-price">
+                                        <em>{{setComma(a.oprice)}}</em>
+                                        <span v-if="a.oprice">원</span>
+                                    </span>
+                                    <br>
+                                    <span class="discount-price">
+                                        <em>{{setComma(a.dprice)}}</em>
+                                        <span>원</span>
+                                    </span>
+                                    <span class="percent-price" v-if="a.oprice && a.dprice">
+                                        <em>{{setDiscount(a.oprice,a.dprice)}}</em>
+                                    </span>
+                                    <div class="box_grade">
+                                        <div class="star">
+                                            <span v-if="a.review">{{'(' + a.review + ')'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                       </template>
                     </ul>
                 </div>
@@ -689,20 +578,20 @@ Vue.component("dt-comp", {
     },
     // 더하기함수
     plusBtn() {
-        let num = $(".opt_num input").val();
-        num++;
-        // 업데이트
-        $(".opt_num input").val(num);
-        store.state.result = num;
+      let num = $(".opt_num input").val();
+      num++;
+      // 업데이트
+      $(".opt_num input").val(num);
+      store.state.result = num;
     },
     // 빼기함수
-      minusBtn() {
-        let num = $(".opt_num input").val();
-        num--;
-        if (num === 0) return;
-        // 업데이트
-        $(".opt_num input").val(num);
-        store.state.result = num;
+    minusBtn() {
+      let num = $(".opt_num input").val();
+      num--;
+      if (num === 0) return;
+      // 업데이트
+      $(".opt_num input").val(num);
+      store.state.result = num;
     },
     // 디테일페이지 닫기 메서드
     closeDetail() {
@@ -1117,8 +1006,6 @@ new Vue({
       // 이벤트 버블링 막기
       e.stopPropagation();
       $(this).toggleClass("on");
-      const likebtn = $(this).find("button");
-      $(this).is(".on") ? likebtn.css({ color: "#ff4465", border: "1px solid #ff4465" }) : likebtn.css({ color: "#bbb", border: "1px solid #bbb" });
     });
 
     // 서브페이지 초기데이터 셋팅
@@ -1139,12 +1026,6 @@ new Vue({
     // 최초호출!
     // lnb 클래스 on 함수
     initCatnum();
-
-    // 매장 검색 함수
-    mapSearch();
-
-    // 메인 대문배너 함수
-    bannerSwiper();
   }, ////////////// mounted ////////////////////
 }); ////////////////// Vue 인스턴스 //////////////////////
 

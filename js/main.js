@@ -1,7 +1,7 @@
 // 웹&앱 PJ 메인페이지 JS -main.js
 import {mapData} from "./gdsData/mainData.js";
 
-// 메인 대문배너 함수
+// 메인 배너 함수
 function bannerSwiper() {
   // 스와이퍼 커스텀
   let banSwiper = new Swiper(".mSwiper", {
@@ -24,7 +24,9 @@ function bannerSwiper() {
   }); 
 } // bannerSwiper
 
-// 메인 section5 매장 검색 함수
+bannerSwiper();
+
+// 매장 검색 함수
 function mapSearch() {
     $(".tabbx li").click(function() {
         // '지역검색' 클릭시 나타날 지역데이터
@@ -144,7 +146,6 @@ function mapSearch() {
     }); ////// click ///////
 }; ////// mapSearch 함수 ///////
 
-
-export {bannerSwiper, mapSearch};
+mapSearch();
 
 

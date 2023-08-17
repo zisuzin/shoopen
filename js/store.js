@@ -1,4 +1,7 @@
 // 서브 페이지 뷰엑스 스토어 셋팅 JS  - store.js
+import womenData from "./gdsData/womenData.js";
+import menData from "./gdsData/menData.js";
+import kidsData from "./gdsData/kidsData.js";
 
 const store = new Vuex.Store({
   // (1) 데이터 셋팅구역:
@@ -6,6 +9,7 @@ const store = new Vuex.Store({
     // gnb 데이터셋업
     gnb: {
       "women": {
+        items: womenData,
         maintit: "WOMEN",
         subtit: ["신상", "베스트", "여성신발", "여성가방", "여성잡화"],
         dpt1: ["플랫슈즈", "샌들"],
@@ -44,6 +48,7 @@ const store = new Vuex.Store({
         }
       },
       "men": {
+        items: menData,
         maintit: "MEN",
         subtit: ["신상", "베스트", "남성신발", "남성가방", "남성잡화"],
         dpt1: ["스니커즈", "슬리퍼"],
@@ -82,6 +87,7 @@ const store = new Vuex.Store({
         }
       },
       "kids": {
+        items: kidsData,
         maintit: "KIDS",
         subtit: ["신상", "베스트", "아동신발", "아동가방", "아동잡화"],
         dpt1: ["구두", "샌들"],
@@ -135,6 +141,8 @@ const store = new Vuex.Store({
     curUrl0: "",
     curUrl1: "",
     curUrl2: "",
+    // 서브페이지 출력 변수
+    imgpath: {},
 
     // lnb 사용 변수
     setlnb: "",
@@ -143,7 +151,7 @@ const store = new Vuex.Store({
     // 카테고리 옵션 변수
     pdlength: "",
 
-    // 디테일 기본
+    // 상세페이지 기본
     dtname: "",
     dtimg: "",
     dtoprice: "",
@@ -195,6 +203,9 @@ const store = new Vuex.Store({
       st.curUrl1 = decodeURIComponent(st.curUrl1);
       st.curUrl2 = decodeURIComponent(st.curUrl2);
       
+      // 소분류 메뉴출력을 위한 변수
+      st.imgpath = st.gnb[st.curUrl0].items[st.curUrl1]
+      console.log(st.imgpath)
       // console.log("넘어온 url 복원값:",st.curUrl0,"/",st.curUrl1,"/",st.curUrl2);
     },
   }, ////// mutastions 구역 /////
