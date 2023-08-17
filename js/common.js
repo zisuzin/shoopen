@@ -534,6 +534,13 @@ Vue.component("prod-comp", {
             catTit: ["all", "women", "men", "kids"],
         };
     },
+    mounted() {
+        $(".prod_tab li").click(function() {
+            $(this).addClass("on").siblings().removeClass("on");
+            // if($(this).is(".on"))
+            // $(this).css({backgroundColor: "#fff", border: "2px solid #191919", borderBottom: "transparent"});
+        });
+    },
 })
 
 // [5] 뷰컴포넌트 - 상품디테일
