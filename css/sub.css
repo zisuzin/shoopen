@@ -8,6 +8,8 @@
 
 main {
     padding-top: 80px;
+    /* 메인 최소높이 */
+    min-height: 100vh;
 }
 
 .pagewrap {
