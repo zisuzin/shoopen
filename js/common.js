@@ -1,7 +1,5 @@
 // 스토어 불러오기
 import store from "./store.js";
-// 메인JS 불러오기
-import { mData } from "./gdsData/mainData.js";
 // 페이지 데이터
 import footData from "./tempData/footerComp.js";
 import mainData from "./tempData/mainComp.js";
@@ -14,8 +12,8 @@ import womenData from "./gdsData/womenData.js";
 import menData from "./gdsData/menData.js";
 import kidsData from "./gdsData/kidsData.js";
 // 메인
-import m_bestData from "./gdsData/bestData.js";
-import {m_newData, s_newData} from "./gdsData/newData.js";
+import { mData, m_newData, m_bestData } from "./gdsData/mainData.js";
+import prdData from "./gdsData/newbestData.js";
 
 /************* 로컬스토리지 위시리스트 셋팅 *************/
 // 위시리스트 배열 데이터
@@ -109,8 +107,8 @@ Vue.component("sub-comp", {
   template: `
     <div class="subbx">
       <div class="all">
-        <a href="#" v-text="$store.state.setsubtit1"></a>
-        <a href="#" v-text="$store.state.setsubtit2"></a>
+        <a href="#" v-text="$store.state.setsubtit1" v-on:click="linkData($store.state.lnbsrc, 'new')"></a>
+        <a href="#" v-text="$store.state.setsubtit2" v-on:click="linkData($store.state.lnbsrc, 'best')"></a>
       </div>
       <dl class="sub">
         <dt class="all"><a href="#" v-text="$store.state.setsubtit3" v-on:click="linksys($store.state.lnbsrc, 'shoes', '전체')"></a></dt>
@@ -127,9 +125,13 @@ Vue.component("sub-comp", {
     </div>
   `,
   methods: {
-    linksys(gnb, cat, src) {
-      // 링크시스템
-      location.href = "sub.html?cat=" + encodeURIComponent(gnb) + "&" + cat + "&" + encodeURIComponent(src);
+    // gnb클릭시 링크시스템
+    linksys(cat1, cat2, cat3) {
+      location.href = "sub.html?cat=" + encodeURIComponent(cat1) + "&" + cat2 + "&" + encodeURIComponent(cat3);
+    },
+    // new, best 클릭 전용 링크시스템!! (위랑 헷갈리지 말기!)
+    linkData(pm1, pm2) {
+        location.href = "prod.html?cat=" + pm1 + "&" + pm2;
     },
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
@@ -522,14 +524,14 @@ Vue.component("goods-comp", {
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
 
-// [5] 뷰컴포넌트 - new 상품리스트
-Vue.component("new-comp", {
-    template: comData.newComp,
+// [5] 뷰컴포넌트 - new/best 상품리스트
+Vue.component("prod-comp", {
+    template: comData.prdComp,
     mixins: [crossMixin],
     data() {
         return {
-            s_newData: s_newData,
-            catTit: ["women", "men", "kids"],
+            prdData: prdData,
+            catTit: ["all", "women", "men", "kids"],
         };
     },
 })

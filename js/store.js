@@ -125,7 +125,6 @@ const store = new Vuex.Store({
           }
         }
       },
-      "기획전": {}
     }, ////// gnb //////
 
     //////////////////////////////
@@ -186,7 +185,6 @@ const store = new Vuex.Store({
     getLink(st,pm) {
       // 1. Get방식으로 넘어온 값 받기!
       st.curUrl = location.href;
-      // console.log("넘어온 url 주소 ",st.curUrl);
 
       // 2. index페이지에선 작동 안하게하기
       if(st.curUrl.indexOf("?") === -1) return;
@@ -206,11 +204,12 @@ const store = new Vuex.Store({
       
       // 소분류 메뉴출력을 위한 변수
       st.imgpath = st.gnb[st.curUrl0].items[st.curUrl1]
-      console.log(st.imgpath)
-      // console.log("넘어온 url 복원값:",st.curUrl0,"/",st.curUrl1,"/",st.curUrl2);
+      console.log(st.curUrl0)
+      console.log(st.curUrl1)
     },
+    // new/best 상품 출력 함수
     chgList(st,pm) {
-      console.log(pm)
+      // pm은 all, women, men, kids!
       store.state.setcat = pm;
     },
   }, ////// mutastions 구역 /////

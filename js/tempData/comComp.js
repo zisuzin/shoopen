@@ -1,8 +1,8 @@
 const comData = {
-    /* 1. new 아이템 리스트 템플릿 */
-    newComp: `
+    /* 1. new/best 아이템 */
+    prdComp: `
         <div class="new_inner">
-            <h2>NEW</h2>
+            <h2>{{$store.state.curUrl1.toUpperCase()}}</h2>
             <div class="new_items">
               <div class="prod_tab">
                 <ul>
@@ -13,12 +13,12 @@ const comData = {
               </div>
               <div class="prod_cont">
                 <ul>
-                  <template v-for="(v,i) in s_newData">
-                      <li v-for="(x,y) in v" :key="x.name">
+                  <template v-for="(v,i) in prdData[$store.state.curUrl1]">
+                      <li v-for="(x,y) in v" :key="x.name" v-if="$store.state.setcat === i || $store.state.setcat === 'all'">
                         <div class="prodbx">
                             <a href="#">
                                 <div class="prod_img">
-                                    <img :src="'./images/goods/'+$store.state.setcat+'/'+'new'+'/'+x.img" alt="x.name">
+                                    <img :src="'./images/goods/'+x.img" alt="x.name">
                                 </div>
                                 <div class="prod_txt">
                                     <strong class="brand">슈펜</strong>
@@ -48,7 +48,7 @@ const comData = {
         </div>
     `,
 
-    /* 3. 위시리스트 */
+    /* 2. 위시리스트 */
     wishComp: `
     <aside class="wish_comp">
         <div class="wish_wrap">
@@ -113,7 +113,7 @@ const comData = {
     </aside>
     `,
     
-    /* 4. 로그인 템플릿 */
+    /* 3. 로그인 템플릿 */
     userComp: `
         <aside class="user_comp">
             <div class="login_wrap">
@@ -159,7 +159,7 @@ const comData = {
         </aside>
     `,
 
-    /* 5. 회원가입 템플릿 */
+    /* 4. 회원가입 템플릿 */
     signupComp: `
     <div class="signup_wrap">
         <div class="signup_bx">
