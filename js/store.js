@@ -143,6 +143,7 @@ const store = new Vuex.Store({
     curUrl2: "",
     // 서브페이지 출력 변수
     imgpath: {},
+    setcat: "",
 
     // lnb 사용 변수
     setlnb: "",
@@ -207,6 +208,10 @@ const store = new Vuex.Store({
       st.imgpath = st.gnb[st.curUrl0].items[st.curUrl1]
       console.log(st.imgpath)
       // console.log("넘어온 url 복원값:",st.curUrl0,"/",st.curUrl1,"/",st.curUrl2);
+    },
+    chgList(st,pm) {
+      console.log(pm)
+      store.state.setcat = pm;
     },
   }, ////// mutastions 구역 /////
 }); ///////////// 뷰엑스 인스턴스 /////////////

@@ -15,7 +15,7 @@ import menData from "./gdsData/menData.js";
 import kidsData from "./gdsData/kidsData.js";
 // 메인
 import m_bestData from "./gdsData/bestData.js";
-import m_newData from "./gdsData/newData.js";
+import {m_newData, s_newData} from "./gdsData/newData.js";
 
 /************* 로컬스토리지 위시리스트 셋팅 *************/
 // 위시리스트 배열 데이터
@@ -53,7 +53,8 @@ const crossMixin = {
     },
     // 배열 순번 셋업함수
     setNum(pm) {
-      return (store.state.setNumber = pm);
+        console.log(pm)
+      return store.state.setNumber = pm;
     },
     // 정가/할인가 비교해서 할인율 계산 함수
     setDiscount(oprice, dprice) {
@@ -520,6 +521,18 @@ Vue.component("goods-comp", {
     this.moveSl();
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
+
+// [5] 뷰컴포넌트 - new 상품리스트
+Vue.component("new-comp", {
+    template: comData.newComp,
+    mixins: [crossMixin],
+    data() {
+        return {
+            s_newData: s_newData,
+            catTit: ["women", "men", "kids"],
+        };
+    },
+})
 
 // [5] 뷰컴포넌트 - 상품디테일
 Vue.component("dt-comp", {

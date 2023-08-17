@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHOOPEN</title>
+    <!-- 파비콘 -->
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.elandrs.com/f/img/favicon/shoopen.ico" />
+    <!-- 폰트어썸 외부 링크 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- 스와이퍼 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="./css/common.css" />
+    <!-- 메인 CSS -->
+    <link rel="stylesheet" href="./css/sub.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+  </head>
+  <body>
+    <!-- 상단영역 -->
+    <header id="top">
+      <!-- 속박스 -->
+      <div class="top fxbx">
+        <!-- GNB -->
+        <nav>
+          <div class="gnb">
+            <!-- 1. 로고영역 -->
+            <div class="logo">
+              <a href="index.html">
+                <img src="./images/logo/logo.png" alt="메인로고" />
+              </a>
+            </div>
+            <!-- 2. 카테고리영역 -->
+            <category-comp></category-comp>
+          </div>
+          <!-- 3. 사이드 영역-->
+          <side-comp></side-comp>
+        </nav>
+        <!-- 3-1. 로그인/회원가입 컴포넌트 -->
+        <user-comp></user-comp>
+        <!-- 3-2. 위시리스트 컴포넌트 -->
+        <wish-comp></wish-comp>
+      </div>
+    </header>
+    <!-- 메인영역 -->
+    <main id="cont">
+      <!-- 속박스 -->
+      <div class="cont">
+        <!-- new 상품리스트 -->
+        <section class="new_container">
+            <new-comp></new-comp>
+        </section>
+      </div>
+    </main>
+    <!-- 하단영역 -->
+    <footer id="info">
+      <!-- 속박스 -->
+      <div class="info">
+        <!-- 푸터영역 -->
+        <foot-comp></foot-comp>
+        <p class="f_copyright">COPYRIGHT © WONDERPLACE ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+    <!-- 뷰JS 스탠드얼론 버전 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- 뷰JS vuex CDN -->
+    <script src="https://unpkg.com/vuex@3.0.0"></script>
+
+    <!-- 스와이퍼 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <!-- 제이쿼리 라이브러리 -->
+    <script src="./js/plugin/jquery-3.6.0.min.js"></script>
+    <script src="./js/plugin/jquery-ui.min.js"></script>
+
+    <!-- 메인페이지 JS -->
+    <script src="./js/common.js" type="module"></script>
+  </body>
+</html>
