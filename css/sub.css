@@ -2,8 +2,10 @@
 
 /* 웹&앱PJ 서브페이지 CSS - sub.css */
 .container {
-    position: relative;
     background-color: #fff;
+    max-width: 1800px;
+    display: flex;
+    justify-content: center;
 }
 
 main {
@@ -13,12 +15,7 @@ main {
 }
 
 .pagewrap {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    display: block;
-    margin: 0 auto;
-    padding: 0 200px;
+    width: 80%;
 }
 
 /* 상단 lnb */
@@ -400,6 +397,7 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    margin-bottom: 10px;
 }
 
 .ui-prod-bx {
@@ -485,6 +483,7 @@ main {
     font-style: normal;
     font-size: min(2.2rem,2.8vw);
     color: red;
+    font-family: var(--shoopen-font-prodtxt);
 }
 
 .star {
@@ -507,8 +506,14 @@ main {
 .new_container {
     margin: 50px 0;
 }
+.prod_container {
+    max-width: 1800px;
+    display: flex;
+    justify-content: center;
+}
 .new_inner {
-    padding: 0 200px;
+    padding: 50px 0;
+    width: 80%;
 }
 .prod_tab > ul {
     display: flex;
@@ -520,9 +525,10 @@ main {
 }
 .new_inner > h2 {
     text-align: center;
-    font-size: 44px;
+    font-size: 50px;
     font-weight: 800;
     margin-bottom: 30px;
+    font-family: var(--shoopen-font-title);
 }
 /* 상품리스트 */
 .prod_tab > ul > li {
@@ -535,6 +541,7 @@ main {
     border-bottom: 3px solid #000;
     color: #505050;
     cursor: pointer;
+    user-select: none;
 }
 .prod_tab > ul > li > a {
     font-size: 16px;
