@@ -195,7 +195,7 @@ Vue.component("goods-comp", {
                                               <img :src="'./images/goods/'+$store.state.curUrl0+'/'+a.img+'.jpg'" :alt="a.name">
                                           </div>
                                       </a>
-                                      <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                                      <div title="찜하기" class="product_like" v-on:click="addWish(tgData[dataNum()][$store.state.curUrl1],b,1)">
                                           <button type="button" class="fa-solid fa-heart"></button>
                                       </div>
                                   </div>
@@ -236,7 +236,7 @@ Vue.component("goods-comp", {
   data() {
     return {
       // 외부 더미 데이터들
-      prdData: [womenData, menData, kidsData],
+      tgData: [womenData, menData, kidsData],
     };
   },
   mixins: [crossMixin],
@@ -334,34 +334,6 @@ Vue.component("goods-comp", {
     },
     // 정렬 기능 메서드
     sortList(pm) {
-      // 객체를 배열로 변환후 각 배열객체 안을 해당되는 파라미터값으로 순회
-      let tempData = Object.keys(womenData)
-        .map((item) => womenData[item][store.state.curUrl2])
-        .filter((arr) => arr !== undefined)
-        .map((arr) => arr.map((ele) => ele));
-
-      function compare(key) {
-        return (a, b) => {
-          console.log(a[key], b[key]);
-          a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
-          console.log(a.dprice);
-        };
-      }
-
-      console.log(tempData[0]);
-
-      let comparePrice;
-      let liTxt = $(event.currentTarget).text();
-      console.log(liTxt);
-
-      if (liTxt === "낮은가격순" || liTxt === "높은가격순") {
-        comparePrice = tempData[0].sort(compare(pm));
-      }
-
-      // 정렬된 결과를 tempData에 재할당
-      let tgData = Object.keys(womenData)
-        .map((item) => womenData[item][store.state.curUrl2])
-        .filter((arr) => arr !== undefined);
     },
     // 가격필터링 메서드
     moveSl() {
@@ -448,7 +420,6 @@ Vue.component("goods-comp", {
     setCatnum(num) {
       store.state.catnum = num;
       store.state.curUrl2 = num;
-      console.log(num);
 
       this.plusArr(num);
 
