@@ -152,7 +152,7 @@ const menData = {
                 size: ["250", "260", "270", "280", "290"],
             },
             {   idx: 2,
-                name: "[경량EVA] 논슬립 베이직 리커버리 쪼리",
+                name: "논슬립 베이직 리커버리 쪼리",
                 img: "shoes/slippers/item_3",
                 wsimg: "men/shoes/slippers/item_3",
                 sumimg2: "slippers/sum2/item_3",

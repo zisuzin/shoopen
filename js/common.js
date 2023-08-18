@@ -128,20 +128,10 @@ Vue.component("sub-comp", {
     // gnb클릭시 링크시스템
     linksys(cat1, cat2, cat3) {
       location.href = "sub.html?cat=" + encodeURIComponent(cat1) + "&" + cat2 + "&" + encodeURIComponent(cat3);
-
-      // '#' 부분 제거
-      if (window.location.hash) {
-        history.replaceState(null, document.title, window.location.pathname + window.location.search);
-      }
     },
     // new, best 클릭 전용 링크시스템!! (위랑 헷갈리지 말기!)
     linkData(pm1, pm2) {
       location.href = "prod.html?cat=" + pm1 + "&" + pm2;
-
-      // '#' 부분 제거
-      if (window.location.hash) {
-        history.replaceState(null, document.title, window.location.pathname + window.location.search);
-      }
     },
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
@@ -165,33 +155,33 @@ Vue.component("goods-comp", {
                   </div>
                 </div>
               </div>
-                <!-- 상품옵션 선택박스 -->
-                <div class="prd-cat-option">
-                <!-- 상품정렬 탭 -->
-                    <ul class="option-left">
-                        <li class="filter_option" v-on:click="sortList('catnum')">
-                            <a href="#">신상품순</a>
-                        </li>
-                        <li class="filter_option" v-on:click="sortList('dprice')">
-                            <a href="#">낮은가격순</a>
-                        </li>
-                        <li class="filter_option" v-on:click="sortList('dprice')">
-                            <a href="#">높은가격순</a>
-                        </li>
-                        <li class="filter_option" v-on:click="sortList('review')">
-                            <a href="#">상품평순</a>
-                        </li>
-                    </ul>
-                    <div class="option-right">
-                        <!-- 상품카운트 박스 -->
-                        <div class="prd_count">
-                            <p>
-                            <strong>{{$store.state.pdlength}}</strong>
-                            items
-                            </p>
-                        </div>
-                    </div>
-                </div>
+              <!-- 상품옵션 선택박스 -->
+              <div class="prd-cat-option">
+              <!-- 상품정렬 탭 -->
+                  <ul class="option-left">
+                      <li class="filter_option" v-on:click="sortList('catnum')">
+                          <a href="#">신상품순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('dprice')">
+                          <a href="#">낮은가격순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('dprice')">
+                          <a href="#">높은가격순</a>
+                      </li>
+                      <li class="filter_option" v-on:click="sortList('review')">
+                          <a href="#">상품평순</a>
+                      </li>
+                  </ul>
+                  <div class="option-right">
+                      <!-- 상품카운트 박스 -->
+                      <div class="prd_count">
+                          <p>
+                          <strong>{{$store.state.pdlength}}</strong>
+                          items
+                          </p>
+                      </div>
+                  </div>
+              </div>
               <!-- 상품리스트 박스 -->
               <div class="prdbx">
                 <div class="prdwrap">
