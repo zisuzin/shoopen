@@ -128,10 +128,20 @@ Vue.component("sub-comp", {
     // gnb클릭시 링크시스템
     linksys(cat1, cat2, cat3) {
       location.href = "sub.html?cat=" + encodeURIComponent(cat1) + "&" + cat2 + "&" + encodeURIComponent(cat3);
+
+      // '#' 부분 제거
+      if (window.location.hash) {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      }
     },
     // new, best 클릭 전용 링크시스템!! (위랑 헷갈리지 말기!)
     linkData(pm1, pm2) {
       location.href = "prod.html?cat=" + pm1 + "&" + pm2;
+
+      // '#' 부분 제거
+      if (window.location.hash) {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      }
     },
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
@@ -1034,6 +1044,7 @@ new Vue({
     function initCatnum() {
       // lnb 텍스트 저장 변수
       const ary = $(".catmenu > a > span");
+      const ary2 = $(".prod_tab li > a");
 
       // 각 변수에 셋팅하기
       ary.each(function (idx, ele) {
@@ -1043,6 +1054,14 @@ new Vue({
           $(this).parent().trigger("click").addClass("on").siblings().removeClass("on");
         }
       });
+
+      // 아래는 new/best 페이지 전용!
+      ary2.each(function (idx, ele) {
+        if ($(ele).text() === store.state.curUrl0.toUpperCase()) {
+          // 트리거 셋팅
+          $(this).parent().trigger("click").addClass("on").siblings().removeClass("on");
+        }
+      })
     } ////////////// initCatnum 함수 ////////////////
 
     // 최초호출!

@@ -20,11 +20,14 @@ const comData = {
                                 <div class="prod_img">
                                     <img :src="'./images/goods/'+x.img" alt="x.name">
                                 </div>
-                                <div class="prod_txt">
-                                    <strong class="brand">슈펜</strong>
-                                    <p>{{x.name}}</p>
-                                </div>
                             </a>
+                            <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                                <button type="button" class="fa-solid fa-heart"></button>
+                            </div>
+                            <div class="prod_txt">
+                                <strong class="brand">슈펜</strong>
+                                <p>{{x.name}}</p>
+                            </div>
                         </div>
                         <div class="pricebx">
                             <span class="original-price">
