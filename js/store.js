@@ -198,9 +198,6 @@ const store = new Vuex.Store({
       st.curUrl0 = decodeURIComponent(st.curUrl0);
       st.curUrl1 = decodeURIComponent(st.curUrl1);
       st.curUrl2 = decodeURIComponent(st.curUrl2);
-      
-      // 소분류 메뉴출력을 위한 변수
-      st.imgpath = st.gnb[st.curUrl0].items[st.curUrl1]
     },
     // new/best 상품 출력 함수
     chgList(st,pm) {

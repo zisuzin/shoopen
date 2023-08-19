@@ -132,8 +132,18 @@ const crossMixin = {
 Vue.component("category-comp", {
   template: `
     <ul class="catbx">
-      <li v-for="(v,i) in $store.state.gnb" :key="i">
+      <li>
+        <a href="#" v-on:click.prevent="linkData('all', 'new')">NEW</a>
+      </li>
+      <li>
+        <a href="#" v-on:click.prevent="linkData('all', 'best')">BEST</a>
+      </li>
+      <!-- sub-comp 출력되는 gnb -->
+      <li class="tgGnb" v-for="(v,i) in $store.state.gnb" :key="i">
         <a href="#" v-on:click="chgData(i)">{{i.toUpperCase()}}</a>
+      </li>
+      <li>
+        <a href="#" v-on:click.prevent="linkData('all', '기획전')">기획전</a>
       </li>
       <sub-comp></sub-comp>
     </ul>
@@ -156,6 +166,10 @@ Vue.component("category-comp", {
       store.state.setdpt1 = store.state.gnb[parm].dpt1;
       store.state.setdpt2 = store.state.gnb[parm].dpt2;
       store.state.setdpt3 = store.state.gnb[parm].dpt3;
+    },
+    // new, best 클릭 전용 링크시스템
+    linkData(pm1, pm2) {
+      location.href = "prod.html?cat=" + pm1 + "&" + pm2;
     },
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
@@ -187,7 +201,7 @@ Vue.component("sub-comp", {
     linksys(cat1, cat2, cat3) {
       location.href = "sub.html?cat=" + encodeURIComponent(cat1) + "&" + cat2 + "&" + encodeURIComponent(cat3);
     },
-    // new, best 클릭 전용 링크시스템!! (위랑 헷갈리지 말기!)
+    // // new, best 클릭 전용 링크시스템!! (위랑 헷갈리지 말기!)
     linkData(pm1, pm2) {
       location.href = "prod.html?cat=" + pm1 + "&" + pm2;
     },
@@ -296,6 +310,10 @@ Vue.component("goods-comp", {
       // 외부 더미 데이터들
       tgData: [womenData, menData, kidsData],
     };
+  },
+  created() {
+    // 소분류 메뉴출력을 위한 변수
+    store.state.imgpath = store.state.gnb[store.state.curUrl0].items[store.state.curUrl1];
   },
   mixins: [crossMixin],
   methods: {
@@ -935,19 +953,17 @@ new Vue({
   },
   mounted() {
     // 클릭시 li에 클래스 on
-    $(".catbx li > a").click(function (e) {
+    $(".catbx > .tgGnb").click(function (e) {
       // 기본기능막기
       e.preventDefault();
-      $(this).parent().addClass("on").siblings().removeClass("on");
+      $(this).addClass("on").siblings().removeClass("on");
       $(".top").addClass("on");
-      $(".subbx").fadeIn(400);
     }); ///////// click ////////////
 
     // 마우스아웃시 전체 클래스 빼기
     $("nav").mouseleave(function () {
       $(".top").removeClass("on");
-      $(".catbx li").removeClass("on");
-      $(".subbx").fadeOut(100);
+      $(".catbx > .tgGnb").removeClass("on");
     }); ///////// mouseleave //////////
 
     // 위시 데이터 새로고침시 최초셋팅
