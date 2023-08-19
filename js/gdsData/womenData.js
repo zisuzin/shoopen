@@ -29,7 +29,7 @@ const womenData = {
                 size: ["230", "235", "240", "245", "250"],
             },
             {   idx: 2,
-                name:"[가드너] 스퀘어 리본 플랫슈즈 HPWWFDA01S",
+                name:"[가드너] 스퀘어 리본 플랫슈즈",
                 img: "shoes/flat/item_3",
                 wsimg: "women/shoes/flat/item_3",
                 sumimg2: "flat/sum2/item_3",

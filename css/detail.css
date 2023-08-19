@@ -69,7 +69,6 @@
 
 .swbtn {
     color: #000;
-    user-select: none;
 }
 
 /* 구매 디테일 박스 */
@@ -146,11 +145,11 @@
 
 .option_list {
     /* 옵션박스 처음엔 숨김 */
-    display: none;
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 100%;
     z-index: 1;
+    display: none;
 }
 
 .option_list.coloropt {
@@ -173,7 +172,6 @@
     height: 100%;
     line-height: 27px;
     background: #fff;
-    user-select: none;
     cursor: pointer;
 }
 

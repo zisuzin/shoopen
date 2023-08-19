@@ -3,7 +3,6 @@ import store from "./store.js";
 // 페이지 데이터
 import footData from "./tempData/footerComp.js";
 import mainData from "./tempData/mainComp.js";
-import dtData from "./tempData/DetailComp.js";
 // 공통 데이터
 import comData from "./tempData/comComp.js";
 // 더미 데이터들
@@ -51,7 +50,6 @@ const crossMixin = {
     },
     // 배열 순번 셋업함수
     setNum(pm) {
-      console.log(pm);
       return (store.state.setNumber = pm);
     },
     // 정가/할인가 비교해서 할인율 계산 함수
@@ -260,7 +258,7 @@ Vue.component("goods-comp", {
                     <!-- 상품리스트 -->
                       <ul class="ui-col4">
                         <template v-for="(v,i) in $store.state.imgpath">
-                              <li v-for="(a,b) in v" v-if="$store.state.curUrl2 === i || $store.state.curUrl2 === '전체'" :key="a.name" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave">
+                              <li v-for="(a,b) in v" v-if="$store.state.curUrl2 === i || $store.state.curUrl2 === '전체'" :key="a.name" @click="getData(a)" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave">
                                   <div class="ui-prod-bx">
                                       <a href="#">
                                           <div class="prod-detail-img">
@@ -302,13 +300,155 @@ Vue.component("goods-comp", {
           </div>
         </div>
         <!-- 여기부터 디테일페이지! -->
-        <dt-comp></dt-comp>
+        <div class="dt-comp" v-if="showDt" :style="{display: showDisplay}">
+        <div class="detailbx">
+            <div class="dtsec1">
+            <!-- 이미지 배너 박스 -->
+                <div class="detail_img">
+                    <!-- 슬라이드 이미지 -->
+                    <div class="swiper mySwiper">
+                        <ul class="swiper-wrapper">
+                            <li class="swiper-slide">
+                            <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.dtimg + '.jpg'" alt="썸네일 대표이미지"/>
+                            </li>
+                            <li class="swiper-slide">
+                                <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.curUrl1 + '/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지1"/>
+                            </li>
+                            <li class="swiper-slide">
+                                <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.curUrl1 + '/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지2"/>
+                            </li>
+                        </ul>
+                        <div class="swiper-button-next swbtn"></div>
+                        <div class="swiper-button-prev swbtn"></div>
+                    </div>
+                    <!-- 썸네일 리스트 -->
+                    <div class="swiper mySwiper2">
+                        <ul class="swiper-wrapper">
+                            <li class="swiper-slide">
+                                <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.dtimg + '.jpg'" alt="썸네일 상세이미지1"/>
+                            </li>
+                            <li class="swiper-slide">
+                                <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.curUrl1 + '/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지2"/>
+                            </li>
+                            <li class="swiper-slide">
+                                <img :src="'./images/goods/' + $store.state.curUrl0 + '/' + $store.state.curUrl1 + '/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지3"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 구매 인터페이스 영역 -->
+                <div class="detail_buy">
+                    <div class="buyarea">
+                        <dl>
+                            <dt>{{$store.state.dtname}}</dt>
+                            <dd class="price_wrap">
+                                <div class="price">
+                                    <div class="txt-def">
+                                        <em>
+                                            {{setComma($store.state.dtoprice)}}
+                                            <span v-if="$store.state.dtoprice">원</span>
+                                        </em>
+                                    </div>
+                                    <div class="txt-dsc">
+                                        <em>{{setComma($store.state.dtdprice)}}</em>
+                                        <span>원</span>
+                                        <span class="txt-percent">
+                                            <em>{{setDiscount($store.state.dtoprice, $store.state.dtdprice)}}</em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </dd>
+                            <dd class="box_grade">
+                                <div class="star">
+                                    <span>(29)</span>
+                                </div>
+                            </dd>
+                            <dd class="buy_option">
+                                <ul>
+                                    <li class="color">
+                                        <em>색상</em>
+                                        <div class="copt">
+                                            <div class="option_inner option_color" @click="openCat()">
+                                                <span>색상 옵션을 선택해주세요.</span>
+                                            </div>
+                                            <div class="option_list coloropt">
+                                                <ul>
+                                                    <li v-for="(a,b) in $store.state.dtcolor" :key="b">
+                                                        <span>{{a}}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="size">
+                                        <em>사이즈</em>
+                                        <div class="copt">
+                                            <div class="option_inner option_size">
+                                                <span>사이즈 옵션을 선택해 주세요.</span>
+                                            </div>
+                                            <div class="option_list sizeopt">
+                                            <ul>
+                                                <li v-for="(a,b) in $store.state.dtsize" :key="b">
+                                                    <span>{{a}}</span>
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </dd>
+                            <!-- 최종 결제 상품박스 영역 -->
+                            <div class="dtfinal_bx">
+                                <ul>
+                                    <li>
+                                        <div class="opt_name">{{'[택배배송] ' + $store.state.pickcolor + '/' + $store.state.picksize}}</div>
+                                        <div class="opt_num">
+                                            <a href="#" role="button" class="minus" v-on:click.prevent="minusBtn()">수량감소</a>
+                                            <a href="#" role="button" class="plus" v-on:click.prevent="plusBtn()">수량증가</a>
+                                            <label>
+                                                <input type="number" class="num" title="수량" value="1">
+                                            </label>
+                                        </div>
+                                        <div class="opt_price">
+                                            <strong>{{setComma($store.state.dtdprice)}}</strong>원
+                                        </div>
+                                        <span class="opt_del">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dttot_bx">
+                                <span class="tot_txt">총 합계</span>
+                                <span class="tot_price">
+                                    <strong>{{setComma(Number($store.state.dtdprice)*($store.state.result))}}</strong>
+                                    원
+                                </span>
+                            </div> 
+                            <div class="dtbtn">
+                                <a href="#">CART</a>
+                                <a href="#">BUY</a>
+                            </div>
+                            <div class="dtbtn clbtn" @click="closeDetail">
+                                <a href="#">
+                                    CLOSE
+                                    <i class="fa-solid fa-xmark"></i>
+                                </a>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       </div>
   `,
   data() {
     return {
       // 외부 더미 데이터들
       tgData: [womenData, menData, kidsData],
+      showDt: false,
+      showDisplay: 'none',
     };
   },
   created() {
@@ -335,25 +475,101 @@ Vue.component("goods-comp", {
 
       return { chgtit, pm2 };
     },
-    getData(pm, idx) {
+    getData(pm) {
       // [ 스토어 전역변수에 업데이트! ]
       // 기본정보 데이터
-      store.state.dtname = pm[store.state.curUrl2][idx]["name"];
-      store.state.dtimg = pm[store.state.curUrl2][idx]["img"];
-      store.state.dtoprice = pm[store.state.curUrl2][idx]["oprice"];
-      store.state.dtdprice = pm[store.state.curUrl2][idx]["dprice"];
-      store.state.dtcolor = pm[store.state.curUrl2][idx]["color"];
-      store.state.dtsize = pm[store.state.curUrl2][idx]["size"];
+      store.state.dtname = pm["name"];
+      store.state.dtimg = pm["img"];
+      store.state.dtoprice = pm["oprice"];
+      store.state.dtdprice = pm["dprice"];
+      store.state.dtcolor = pm["color"];
+      store.state.dtsize = pm["size"];
       // 썸네일 데이터
-      store.state.dtsumimg2 = pm[store.state.curUrl2][idx]["sumimg2"];
-      store.state.dtsumimg3 = pm[store.state.curUrl2][idx]["sumimg3"];
+      store.state.dtsumimg2 = pm["sumimg2"];
+      store.state.dtsumimg3 = pm["sumimg3"];
 
       // 디테일박스 열기
-      $(".dt-comp").css("display", "block");
+      this.showDisplay = 'block',
+      // dt-comp 조건부 렌더링!   
+      this.showDt = true;
     },
-    // 정렬 기능 메서드
-    sortList(pm) {
-    },
+    // 카테고리 보이기 메서드
+    openCat() {
+        const opt1 = $(".option_color");
+        const opt2 = $(".option_size");
+  
+        // 클래스 유무로 컬러옵션 보이기/숨김
+        opt1.toggleClass("on");
+        opt1.is(".on") ? opt1.siblings().css("display", "block") : opt1.siblings().css("display", "none");
+  
+        opt1.siblings().find("li").click(function () {
+            $(this).addClass("on").siblings().removeClass("on");
+            const tgcolor = $(this).text();
+            // li에 클래스 on 되면 부모박스 클래스 제거, 옵션창 닫음, 안내문구 텍스트 변경
+            if ($(this).is(".on")) {
+              $(".coloropt").css("display", "none") && opt1.removeClass("on") && $(".option_color > span").text(tgcolor);
+            }
+  
+            // .coloropt li 클릭후 opt2 클릭시
+            opt2.click(function () {
+              opt2.toggleClass("on");
+              opt2.is(".on") ? opt2.siblings().css("display", "block") : opt2.siblings().css("display", "none");
+              opt2
+                .siblings()
+                .find("li")
+                .click(function () {
+                  $(this).addClass("on").siblings().removeClass("on");
+                  const tgsize = $(this).text();
+  
+                  if ($(this).is(".on")) {
+                    $(".sizeopt").css("display", "none") &&
+                      opt2.removeClass("on") &&
+                      $(".option_color > span").text("색상 옵션을 선택해주세요.") &&
+                      // 최종 결제 옵션/금액 박스 보이기
+                      $(".dtfinal_bx").css("display", "block") &&
+                      $(".dttot_bx").css("display", "block");
+                    // 선택한 색상/사이즈값 스토어 보내기
+                    store.state.picksize = tgsize;
+                    store.state.pickcolor = tgcolor;
+                  }
+  
+                  $(".opt_del").click(function () {
+                    $(".dtfinal_bx").css("display", "none");
+                    $(".dttot_bx").css("display", "none");
+                  });
+                }); // opt2 옵션리스트 li click
+            }); // op2t click
+          }); // opt1 li click
+      },
+      // 더하기함수
+      plusBtn() {
+        let num = $(".opt_num input").val();
+        num++;
+        // 업데이트
+        $(".opt_num input").val(num);
+        store.state.result = num;
+      },
+      // 빼기함수
+      minusBtn() {
+        let num = $(".opt_num input").val();
+        num--;
+        if (num === 0) return;
+        // 업데이트
+        $(".opt_num input").val(num);
+        store.state.result = num;
+      },
+      // 디테일페이지 닫기 메서드
+      closeDetail() {
+        // 상품 디테일박스 & 상품 옵션 박스 & 최종 결제가 박스 닫힘
+        $(".dt-comp").css("display", "none");
+        $(".dtfinal_bx").css("display", "none");
+        $(".dttot_bx").css("display", "none");
+        // 색상 선택후 바로 닫기버튼 클릭시 텍스트 초기화
+        $(".option_color > span").text("색상 옵션을 선택해 주세요.");
+
+        // dt-comp 조건부 렌더링2   
+        this.showDisplay = true;
+      },
     // 가격필터링 메서드
     moveSl() {
       const tgsl = document.querySelectorAll(".range_input > input");
@@ -395,52 +611,10 @@ Vue.component("goods-comp", {
         console.log(result);
       });
     },
-    // 카테고리 '전체'인 경우 배열 합치기 메서드
-    plusArr(pm) {
-      store.state.catnum = pm;
-      let newArr = [];
-      let newArr2 = [];
-      switch (pm) {
-        case "전체":
-          const val = store.state.gnb[store.state.curUrl0][store.state.curUrl1];
-          // 객체 -> 배열로 변환하기
-          const data = Object.values(val);
-          // 1. 사이즈
-          data.forEach((x) => {
-            // 배열 합치기
-            newArr = newArr.concat(x.size);
-            // 오름차순 정렬
-            const sortArr = newArr.sort((a, b) => a - b);
-            // 중복값 제거
-            const uniqueArr = [...new Set(sortArr)];
-            // 스토어 보내기!
-            store.state.combineArr = uniqueArr;
-            // console.log(newArr)
-            // uniqueArr.map((x,i)=>console.log(x,i))
-          }); ////////// forEach /////////////
-
-          // 2. 색상
-          data.forEach((x) => {
-            // 배열 합치기
-            newArr2 = newArr2.concat(x.color);
-            // 오름차순 정렬
-            const sortArr2 = newArr2.sort((a, b) => a - b);
-            // 중복값 제거
-            const uniqueArr2 = [...new Set(sortArr2)];
-            // 스토어 보내기!
-            store.state.combineArr2 = uniqueArr2;
-            // console.log(uniqueArr2)
-            // uniqueArr2.map((x,i)=>console.log(x.split('^')[1]))
-          }); ////////// forEach /////////////
-          break;
-      }
-    },
     // lnb클릭시 v-if 조건값 설정하는 메서드
     setCatnum(num) {
       store.state.catnum = num;
       store.state.curUrl2 = num;
-
-      this.plusArr(num);
 
       // 이벤트 버블링 막기
       $(".product_like").click(function (e) {
@@ -532,111 +706,6 @@ Vue.component("prod-comp", {
   },
 });
 
-// [5] 뷰컴포넌트 - 상품디테일
-Vue.component("dt-comp", {
-  template: dtData.dtComp,
-  mixins: [crossMixin],
-  methods: {
-    // 카테고리 보이기 메서드
-    openCat() {
-      const opt1 = $(".option_color");
-      const opt2 = $(".option_size");
-      // 클래스 유무로 컬러옵션 보이기/숨김
-      opt1.toggleClass("on");
-      opt1.is(".on") ? opt1.siblings().css("display", "block") : opt1.siblings().css("display", "none");
-
-      opt1
-        .siblings()
-        .find("li")
-        .click(function () {
-          $(this).addClass("on").siblings().removeClass("on");
-          const tgcolor = $(this).text();
-          // li에 클래스 on 되면 부모박스 클래스 제거, 옵션창 닫음, 안내문구 텍스트 변경
-          if ($(this).is(".on")) {
-            $(".coloropt").css("display", "none") && opt1.removeClass("on") && $(".option_color > span").text(tgcolor);
-          }
-
-          // .coloropt li 클릭후 opt2 클릭시
-          opt2.click(function () {
-            opt2.toggleClass("on");
-            opt2.is(".on") ? opt2.siblings().css("display", "block") : opt2.siblings().css("display", "none");
-            opt2
-              .siblings()
-              .find("li")
-              .click(function () {
-                $(this).addClass("on").siblings().removeClass("on");
-                const tgsize = $(this).text();
-
-                if ($(this).is(".on")) {
-                  $(".sizeopt").css("display", "none") &&
-                    opt2.removeClass("on") &&
-                    $(".option_color > span").text("색상 옵션을 선택해주세요.") &&
-                    // 최종 결제 옵션/금액 박스 보이기
-                    $(".dtfinal_bx").css("display", "block") &&
-                    $(".dttot_bx").css("display", "block");
-                  // 선택한 색상/사이즈값 스토어 보내기
-                  store.state.picksize = tgsize;
-                  store.state.pickcolor = tgcolor;
-                }
-
-                $(".opt_del").click(function () {
-                  $(".dtfinal_bx").css("display", "none");
-                  $(".dttot_bx").css("display", "none");
-                });
-              }); // opt2 옵션리스트 li click
-          }); // op2t click
-        }); // opt1 li click
-    },
-    // 더하기함수
-    plusBtn() {
-      let num = $(".opt_num input").val();
-      num++;
-      // 업데이트
-      $(".opt_num input").val(num);
-      store.state.result = num;
-    },
-    // 빼기함수
-    minusBtn() {
-      let num = $(".opt_num input").val();
-      num--;
-      if (num === 0) return;
-      // 업데이트
-      $(".opt_num input").val(num);
-      store.state.result = num;
-    },
-    // 디테일페이지 닫기 메서드
-    closeDetail() {
-      // 상품 디테일박스 & 상품 옵션 박스 & 최종 결제가 박스 닫힘
-      $(".dt-comp").css("display", "none");
-      $(".dtfinal_bx").css("display", "none");
-      $(".dttot_bx").css("display", "none");
-      // 색상 선택후 바로 닫기버튼 클릭시 텍스트 초기화
-      $(".option_color > span").text("색상 옵션을 선택해 주세요.");
-    },
-  }, ///////////// methods /////////////////
-  mounted() {
-    // 상품 상세페이지 스와이퍼 배너
-    const swiper2 = new Swiper(".mySwiper2", {
-      loop: true,
-      spaceBetween: 10,
-      slidesPerView: 3,
-      freeMode: true,
-      watchSlidesProgress: true,
-    });
-
-    const swiper = new Swiper(".mySwiper", {
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      thumbs: {
-        swiper: swiper2,
-      },
-    });
-  },
-});
-
 // [5] 뷰컴포넌트 - 사이드바
 Vue.component("side-comp", {
   template: `
@@ -708,7 +777,6 @@ Vue.component("wish-comp", {
 
       // 수량 업데이트
       $(tg).siblings().eq(1).find("input").val(num);
-      // store.state.cnt = cntUp.val();
     },
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
@@ -1040,7 +1108,7 @@ new Vue({
           // 트리거 셋팅
           $(this).parent().trigger("click").addClass("on").siblings().removeClass("on");
         }
-      })
+      });
     } ////////////// initCatnum 함수 ////////////////
 
     // 최초호출!
