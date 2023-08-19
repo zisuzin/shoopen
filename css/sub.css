@@ -424,7 +424,8 @@ main {
     right: 5px;
 }
 
-.product_like > button {
+.ui-prod-bx .product_like > button,
+.prodbx .product_like > button {
     color: #bbb;
     padding: 1rem;
     border: 1px solid #bbb;
@@ -436,7 +437,8 @@ main {
 }
 
 /* 클래스 on */
-.product_like.on > button {
+.ui-prod-bx .product_like.on > button,
+.prodbx .product_like.on > button {
     color: #ff4465;
     border: 1px solid #ff4465;
 }

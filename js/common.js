@@ -85,8 +85,9 @@ const crossMixin = {
     },
     // 카트 추가 메서드
     addWish(pm, cnt) {
+      console.log("담긴 위시 아이템:", pm);
       let num = cnt; // 기본수량 - 1
-      let imgData = pm["wsimg"];
+      let imgData = pm["wsimg"] || pm["img"];
       let nameData = pm["name"];
       let priceData = pm["dprice"];
 
@@ -994,10 +995,12 @@ new Vue({
     });
 
     // 좋아요 버튼 클릭시 버튼 디자인 변경!
-    $(".product_like").click(function (e) {
-      // 이벤트 버블링 막기
-      e.stopPropagation();
-      $(this).toggleClass("on");
+    this.$nextTick(() => {
+      $(".product_like").click(function (e) {
+        // 이벤트 버블링 막기
+        e.stopPropagation();
+        $(this).toggleClass("on");
+      });
     });
 
     // 서브페이지 초기데이터 셋팅
