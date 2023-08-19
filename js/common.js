@@ -63,6 +63,63 @@ const crossMixin = {
       const discount = ((oprice - dprice) / oprice) * 100;
       return Math.floor(discount) + "%";
     },
+    // url 읽어와서 카테고리마다 고유넘버 적용시키고 결과값으로 보내기
+    dataNum() {
+      let result = "";
+      let cat = store.state.curUrl0;
+
+      // 분기시키기
+      switch (cat) {
+        case (cat = "women"):
+          result = "0";
+          break;
+        case (cat = "men"):
+          result = "1";
+          break;
+        case (cat = "kids"):
+          result = "2";
+          break;
+      }
+      // 분기한 결과값 뱉어내기!
+      return result;
+    },
+    // 카트 추가 메서드
+    addWish(pm, cnt) {
+      let num = cnt; // 기본수량 - 1
+      let imgData = pm["wsimg"];
+      let nameData = pm["name"];
+      let priceData = pm["dprice"];
+
+      let arr = [imgData, nameData, priceData];
+      let arr2 = num;
+      let getItem = localStorage.getItem("ws_item");
+      // 중복데이터 선별 변수 (true/false)
+      let isB = getItem.includes(arr[1]);
+      console.log("중복여부검사:", isB);
+
+      if (isB == true) {
+        // console.log("중복");
+        alert("이미 선택하신 상품입니다.");
+        return;
+      } else if (isB == false) {
+        // console.log("추가")
+
+        // 배열 추가
+        wishData.push(arr);
+        opnum.push(arr2);
+
+        // 로컬스토리지 업데이트
+        localStorage.setItem("ws_item", JSON.stringify(wishData));
+        localStorage.setItem("ws_num", JSON.stringify(opnum));
+        // state 업데이트
+        store.state.wish = wishData;
+        store.state.wishNum = opnum;
+        store.state.callout = opnum.length;
+      }
+
+      // 값이 들어오면 콜아웃 나타남
+      $(".callout").css({ display: "inline-block" });
+    },
   },
 };
 //////////////////////////////////////////////////
@@ -75,7 +132,7 @@ Vue.component("category-comp", {
   template: `
     <ul class="catbx">
       <li v-for="(v,i) in $store.state.gnb" :key="i">
-        <a href="#" v-on:click="chgData(i)">{{v['maintit']||i}}</a>
+        <a href="#" v-on:click="chgData(i)">{{i.toUpperCase()}}</a>
       </li>
       <sub-comp></sub-comp>
     </ul>
@@ -195,7 +252,7 @@ Vue.component("goods-comp", {
                                               <img :src="'./images/goods/'+$store.state.curUrl0+'/'+a.img+'.jpg'" :alt="a.name">
                                           </div>
                                       </a>
-                                      <div title="찜하기" class="product_like" v-on:click="addWish(tgData[dataNum()][$store.state.curUrl1],b,1)">
+                                      <div title="찜하기" class="product_like" v-on:click="addWish(a,1)">
                                           <button type="button" class="fa-solid fa-heart"></button>
                                       </div>
                                   </div>
@@ -241,63 +298,6 @@ Vue.component("goods-comp", {
   },
   mixins: [crossMixin],
   methods: {
-    // 카트 추가 메서드
-    addWish(pm, idx, cnt) {
-      let num = cnt; // 기본수량 - 1
-      let imgData = pm[store.state.curUrl2][idx]["wsimg"];
-      let nameData = pm[store.state.curUrl2][idx]["name"];
-      let priceData = pm[store.state.curUrl2][idx]["dprice"];
-
-      let arr = [imgData, nameData, priceData];
-      let arr2 = num;
-      let getItem = localStorage.getItem("ws_item");
-      // 중복데이터 선별 변수 (true/false)
-      let isB = getItem.includes(arr[1]);
-      console.log("중복여부검사:", isB);
-
-      if (isB == true) {
-        // console.log("중복");
-        alert("이미 선택하신 상품입니다.");
-        return;
-      } else if (isB == false) {
-        // console.log("추가")
-
-        // 배열 추가
-        wishData.push(arr);
-        opnum.push(arr2);
-
-        // 로컬스토리지 업데이트
-        localStorage.setItem("ws_item", JSON.stringify(wishData));
-        localStorage.setItem("ws_num", JSON.stringify(opnum));
-        // state 업데이트
-        store.state.wish = wishData;
-        store.state.wishNum = opnum;
-        store.state.callout = opnum.length;
-      }
-
-      // 값이 들어오면 콜아웃 나타남
-      $(".callout").css({ display: "inline-block" });
-    },
-    // url 읽어와서 카테고리마다 고유넘버 적용시키고 결과값으로 보내기
-    dataNum() {
-      let result = "";
-      let cat = store.state.curUrl0;
-
-      // 분기시키기
-      switch (cat) {
-        case (cat = "women"):
-          result = "0";
-          break;
-        case (cat = "men"):
-          result = "1";
-          break;
-        case (cat = "kids"):
-          result = "2";
-          break;
-      }
-      // 분기한 결과값 뱉어내기!
-      return result;
-    },
     // 타이틀 셋팅
     titSet() {
       // left영역 상단타이틀 변경
@@ -306,7 +306,7 @@ Vue.component("goods-comp", {
 
       let pm = store.state.curUrl0;
       // 상단 메인타이틀 셋팅
-      let chgtit = store.state.gnb[pm].maintit;
+      let chgtit = store.state.curUrl0.toUpperCase();
       // 상단 서브타이틀 셋팅
       let pm2 = store.state.curUrl1.toUpperCase();
 
@@ -507,9 +507,8 @@ Vue.component("prod-comp", {
   },
   mounted() {
     $(".prod_tab li").click(function () {
+      // 클래스 on 일때 css 변경
       $(this).addClass("on").siblings().removeClass("on");
-      // if($(this).is(".on"))
-      // $(this).css({backgroundColor: "#fff", border: "2px solid #191919", borderBottom: "transparent"});
     });
   },
 });

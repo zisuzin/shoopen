@@ -400,7 +400,8 @@ main {
     margin-bottom: 10px;
 }
 
-.ui-prod-bx {
+.ui-prod-bx,
+.prodbx {
     position: relative;
     overflow: hidden;
 }
@@ -411,11 +412,13 @@ main {
 }
 
 /* 상품 찜하기 */
-.ui-col4 > li:hover .product_like > button {
+.ui-col4 > li:hover .product_like > button,
+.prod_cont li:hover .product_like > button {
     opacity: 1;
     transform: translateY(0);
 }
-.ui-prod-bx .product_like {
+.ui-prod-bx .product_like,
+.prodbx .product_like {
     position: absolute;
     bottom: 15px;
     right: 5px;

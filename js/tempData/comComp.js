@@ -21,27 +21,29 @@ const comData = {
                                     <img :src="'./images/goods/'+x.img" alt="x.name">
                                 </div>
                             </a>
-                            <div title="찜하기" class="product_like" v-on:click="addWish(prdData[dataNum()][i],y,1)">
+                            <div title="찜하기" class="product_like2" v-on:click="addWish(x,1)">
                                 <button type="button" class="fa-solid fa-heart"></button>
                             </div>
+                        </div>
+                        <div class="prod-detail">
                             <div class="prod_txt">
                                 <strong class="brand">슈펜</strong>
                                 <p>{{x.name}}</p>
                             </div>
-                        </div>
-                        <div class="pricebx">
-                            <span class="original-price">
-                                <em>{{setComma(x.oprice)}}</em>
-                                <span v-if="x.oprice">원</span>
-                            </span>
-                            <br>
-                            <span class="discount-price">
-                                <em>{{setComma(x.dprice)}}</em>
-                                <span>원</span>
-                            </span>
-                            <span class="percent-price" v-if="x.oprice && x.dprice">
-                                <em>{{setDiscount(x.oprice,x.dprice)}}</em>
-                            </span>
+                            <div class="pricebx">
+                                <span class="original-price">
+                                    <em>{{setComma(x.oprice)}}</em>
+                                    <span v-if="x.oprice">원</span>
+                                </span>
+                                <br>
+                                <span class="discount-price">
+                                    <em>{{setComma(x.dprice)}}</em>
+                                    <span>원</span>
+                                </span>
+                                <span class="percent-price" v-if="x.oprice && x.dprice">
+                                    <em>{{setDiscount(x.oprice,x.dprice)}}</em>
+                                </span>
+                            </div>
                         </div>
                       </li>
                   </template>

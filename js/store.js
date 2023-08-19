@@ -10,7 +10,6 @@ const store = new Vuex.Store({
     gnb: {
       "women": {
         items: womenData,
-        maintit: "WOMEN",
         subtit: ["신상", "베스트", "여성신발", "여성가방", "여성잡화"],
         dpt1: ["플랫슈즈", "샌들"],
         dpt2: ["백팩", "미니백"],
@@ -49,7 +48,6 @@ const store = new Vuex.Store({
       },
       "men": {
         items: menData,
-        maintit: "MEN",
         subtit: ["신상", "베스트", "남성신발", "남성가방", "남성잡화"],
         dpt1: ["스니커즈", "슬리퍼"],
         dpt2: ["맨즈백", "크로스백"],
@@ -88,7 +86,6 @@ const store = new Vuex.Store({
       },
       "kids": {
         items: kidsData,
-        maintit: "KIDS",
         subtit: ["신상", "베스트", "아동신발", "아동가방", "아동잡화"],
         dpt1: ["구두", "샌들"],
         dpt2: ["슬리퍼가방", "패션가방"],
