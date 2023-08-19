@@ -11,7 +11,9 @@
     background-color: #fff;
     z-index: 999;
     /* 처음엔 숨김 */
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: .1s ease;
 }
 
 /* 디테일영역 공통설정 */

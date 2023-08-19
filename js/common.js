@@ -258,7 +258,7 @@ Vue.component("goods-comp", {
                     <!-- 상품리스트 -->
                       <ul class="ui-col4">
                         <template v-for="(v,i) in $store.state.imgpath">
-                              <li v-for="(a,b) in v" v-if="$store.state.curUrl2 === i || $store.state.curUrl2 === '전체'" :key="a.name" @click="getData(a)" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave">
+                              <li v-for="(a,b) in v" v-if="$store.state.curUrl2 === i || $store.state.curUrl2 === '전체'" :key="a.name" @click.prevent="getData(a)" v-on:mouseover="handleMouseOver" v-on:mouseleave="handleMouseLeave">
                                   <div class="ui-prod-bx">
                                       <a href="#">
                                           <div class="prod-detail-img">
@@ -300,7 +300,7 @@ Vue.component("goods-comp", {
           </div>
         </div>
         <!-- 여기부터 디테일페이지! -->
-        <div class="dt-comp" v-if="showDt" :style="{display: showDisplay}">
+        <div class="dt-comp" v-if="showDt" :style="compStyle">
         <div class="detailbx">
             <div class="dtsec1">
             <!-- 이미지 배너 박스 -->
@@ -429,7 +429,7 @@ Vue.component("goods-comp", {
                                 <a href="#">CART</a>
                                 <a href="#">BUY</a>
                             </div>
-                            <div class="dtbtn clbtn" @click="closeDetail">
+                            <div class="dtbtn clbtn" @click.prevent="closeDetail">
                                 <a href="#">
                                     CLOSE
                                     <i class="fa-solid fa-xmark"></i>
@@ -448,8 +448,17 @@ Vue.component("goods-comp", {
       // 외부 더미 데이터들
       tgData: [womenData, menData, kidsData],
       showDt: false,
-      showDisplay: 'none',
     };
+  },
+  computed: {
+    // 상세페이지 조건부 렌더링
+    compStyle() {
+      return {
+        visibility: this.showDt ? 'visible' : 'hidden',
+        opacity: this.showDt ? 1 : 0,
+        transition: this.showDt ? '0.3s ease' : '0s ease', 
+      };
+    },
   },
   created() {
     // 소분류 메뉴출력을 위한 변수
@@ -488,9 +497,9 @@ Vue.component("goods-comp", {
       store.state.dtsumimg2 = pm["sumimg2"];
       store.state.dtsumimg3 = pm["sumimg3"];
 
+      console.log($(".swiper-slide"))
+
       // 디테일박스 열기
-      this.showDisplay = 'block',
-      // dt-comp 조건부 렌더링!   
       this.showDt = true;
     },
     // 카테고리 보이기 메서드
@@ -561,14 +570,13 @@ Vue.component("goods-comp", {
       // 디테일페이지 닫기 메서드
       closeDetail() {
         // 상품 디테일박스 & 상품 옵션 박스 & 최종 결제가 박스 닫힘
-        $(".dt-comp").css("display", "none");
         $(".dtfinal_bx").css("display", "none");
         $(".dttot_bx").css("display", "none");
         // 색상 선택후 바로 닫기버튼 클릭시 텍스트 초기화
         $(".option_color > span").text("색상 옵션을 선택해 주세요.");
 
-        // dt-comp 조건부 렌더링2   
-        this.showDisplay = true;
+        // 디테일박스 닫기
+        this.showDt = false;
       },
     // 가격필터링 메서드
     moveSl() {
