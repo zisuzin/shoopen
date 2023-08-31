@@ -635,7 +635,8 @@ Vue.component("goods-comp", {
     // 서브페이지 최상위 경로 설정해주는 함수
     initSetSubSrc() {
       // 중분류 데이터값에 따라 lnb 데이터 변경!
-      let catval = store.state.curUrl1;
+      let catval = this.$store.state.curUrl1;
+      console.log(catval)
       // 각 카테고리별 lnb 대분류 경로 설정
       switch (catval) {
         case "shoes":
