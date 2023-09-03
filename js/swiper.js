@@ -9,6 +9,7 @@ const swiper2 = new Swiper(".mySwiper2", {
 
 const swiper = new Swiper(".mySwiper", {
   loop: true,
+  slidesPerView: 1,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
