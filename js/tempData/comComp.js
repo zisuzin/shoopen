@@ -19,7 +19,7 @@ const comData = {
                             <div class="prodbx">
                                 <a href="#">
                                     <div class="prod_img">
-                                        <img :src="'./images/goods/'+x.img+'.jpg'" alt="x.name">
+                                        <img :src="'https://zisuzin.github.io/shoopen/images/goods/'+x.img+'.jpg'" alt="x.name">
                                     </div>
                                 </a>
                                 <div title="찜하기" class="product_like" v-on:click="addWish(x,1)">
@@ -83,7 +83,7 @@ const comData = {
                     <tbody>
                         <tr v-for="(v,i) in $store.state.wish" :key="i">
                             <td class="ws_img">
-                                <img :src="'./images/goods/'+v[0]+'.jpg'" alt="찜한 이미지" />
+                                <img :src="'https://zisuzin.github.io/shoopen/images/goods/'+v[0]+'.jpg'" alt="찜한 이미지" />
                             </td>
                             <!-- 상세 정보 -->
                             <td class="ws_info">
@@ -154,12 +154,12 @@ const comData = {
                         <ul class="login_sns">
                             <li>
                                 <a href="#">
-                                    <img src="./images/icon/icon_sns_kakaotalk.svg" alt="카카오톡 로그인"/>
+                                    <img src="https://zisuzin.github.io/shoopen/images/icon/icon_sns_kakaotalk.svg" alt="카카오톡 로그인"/>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="./images/icon/icon_sns_naver.png" alt="네이버 로그인"/>
+                                    <img src="https://zisuzin.github.io/shoopen/images/icon/icon_sns_naver.png" alt="네이버 로그인"/>
                                 </a>
                             </li>
                         </ul>

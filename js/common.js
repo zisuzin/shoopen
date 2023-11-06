@@ -336,7 +336,7 @@ Vue.component("goods-comp", {
                                   <div class="ui-prod-bx">
                                       <a href="#">
                                           <div class="prod-detail-img">
-                                              <img :src="'/images/goods/'+ a.img + '.jpg'" :alt="a.name">
+                                              <img :src="'https://zisuzin.github.io/shoopen/images/goods/'+ a.img + '.jpg'" :alt="a.name">
                                           </div>
                                       </a>
                                       <div title="찜하기" class="product_like" v-on:click="addWish(a,1)">
