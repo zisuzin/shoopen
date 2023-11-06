@@ -5,7 +5,7 @@
 # 🛒 Shoopen
 
 `Vue.js`환경에서 개발한 `슈펜 쇼핑몰 사이트` 입니다.<br>
-<p align="middle"><a href="http://aa">배포 링크</a></p>
+<p align="middle"><a href="zisuzin.github.io/shoopen/">배포 링크</a></p>
 <p align="middle"><a href="https://drive.google.com/file/d/1RcAuyTN9bBm25qNEtLzmBYNSy8b_3dmD/view?usp=sharing">가이드문서</a></p>
 
 </div>
