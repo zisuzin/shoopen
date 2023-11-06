@@ -48,4 +48,4 @@
 <br/>
 
 ## 📚 SPA 구조
-![Group 18](https://github.com/zisuzin/shoopen_cli/assets/120540018/748a4d93-74d7-43fe-b8fa-b3c14f63fc59)
+![Group 18](https://github.com/zisuzin/shoopen/assets/120540018/60f17584-6e8a-407b-a290-d5b5a688da2a)
