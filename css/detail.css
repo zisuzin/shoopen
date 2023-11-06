@@ -179,7 +179,7 @@
   right: 11px;
   width: 11px;
   height: 6px;
-  background: url(/images/icon/ico_arrow_set.png) no-repeat 0 0;
+  background: url(https://zisuzin.github.io/shoopen/images/icon/ico_arrow_set.png) no-repeat 0 0;
 }
 .copt .option_inner span {
   color: #666;
@@ -267,7 +267,7 @@
   width: min(21px, 5vw);
   height: 21px;
   border-right: 1px solid #999;
-  background: url(../../images/icon/ico_detail_all.png) no-repeat -227px -20px;
+  background: url(../..https://zisuzin.github.io/shoopen/images/icon/ico_detail_all.png) no-repeat -227px -20px;
 }
 .opt_num .plus {
   position: absolute;
@@ -275,7 +275,7 @@
   width: min(21px, 5vw);
   height: 21px;
   border-left: 1px solid #999;
-  background: url(../../images/icon/ico_detail_all.png) no-repeat -245px -20px;
+  background: url(../..https://zisuzin.github.io/shoopen/images/icon/ico_detail_all.png) no-repeat -245px -20px;
 }
 .opt_num .num {
   width: 100%;
