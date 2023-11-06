@@ -378,7 +378,7 @@ const comData = {
     menuComp: `
     <!-- MO GNB 메뉴 -->
     <div class="mo_menu">
-        <img src="/images/icon/ico_ctg_black.png" alt="모바일메뉴">
+        <img src="https://zisuzin.github.io/shoopen/images/icon/ico_ctg_black.png" alt="모바일메뉴">
         <div class="accordion" id="accordionDepth1">
             <ul class="nbmenu_btn">
                 <li v-on:click.prevent="linkData('all', 'new')">
