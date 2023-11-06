@@ -991,19 +991,6 @@ Vue.component("mb-comp", {
       notelnb: ["#1만원대 특가 신발", "#보부상 가방", "#썸머 슈즈"],
     };
   },
-  methods: {
-    moveDet(pm) {
-        // 로컬스토리지에 데이터 저장
-        localStorage.setItem("detnm", pm.name);
-
-        // 페이지 이동
-        window.location.href = "prod.html?cat=all&best";
-        setTimeout(() => {
-            // store 함수 호출
-            this.$store.dispatch("setDet");
-        }, 1000);
-    },
-  },
   mounted() {
     // 첫번째 dd에 강제 클릭
     $(".mbtit2 > dd:first").addClass("on").siblings().removeClass("on").trigger("click");
