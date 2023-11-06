@@ -141,6 +141,11 @@ const store = new Vuex.Store({
     imgpath: {},
     setcat: "",
 
+    // 더보기버튼 상태변수
+    mbtn: true,
+    // 더보기배수 변수
+    mnum: 0,
+
     // lnb 사용 변수
     setlnb: "",
     catnum: "",
@@ -203,6 +208,12 @@ const store = new Vuex.Store({
     chgList(st,pm) {
       // pm은 all, women, men, kids!
       store.state.setcat = pm;
+    },
+    // MORE 버튼 클릭시 이미지 증가 함수
+    updateList(dt, pm) {
+        dt.mnum += pm;
+        if (dt.mnum >= 30)
+            dt.mbtn = false;
     },
   }, ////// mutastions 구역 /////
 }); ///////////// 뷰엑스 인스턴스 /////////////

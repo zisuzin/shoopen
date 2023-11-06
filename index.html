@@ -7,8 +7,10 @@
     <title>SHOOPEN</title>
     <!-- 파비콘 -->
     <link rel="shortcut icon" type="image/x-icon" href="https://static.elandrs.com/f/img/favicon/shoopen.ico" />
-    <!-- 폰트어썸 외부 링크 -->
+    <!-- 폰트어썸 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- 부트스트랩 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- 스와이퍼 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- 공통 CSS -->
@@ -23,18 +25,19 @@
       <div class="top fxbx">
         <!-- GNB -->
         <nav>
-          <div class="gnb">
-            <!-- 1. 로고영역 -->
-            <div class="logo">
-              <a href="index.html">
-                <img src="./images/logo/logo.png" alt="메인로고" />
-              </a>
+            <mo-comp></mo-comp>
+            <div class="gnb">
+                <!-- 1. 로고영역 -->
+                <div class="logo">
+                <a href="index.html">
+                    <img src="./images/logo/logo.png" alt="메인로고" />
+                </a>
+                </div>
+                <!-- 2. 카테고리영역 -->
+                <category-comp></category-comp>
             </div>
-            <!-- 2. 카테고리영역 -->
-            <category-comp></category-comp>
-          </div>
-          <!-- 3. 사이드 영역-->
-          <side-comp></side-comp>
+            <!-- 3. 사이드 영역-->
+            <side-comp></side-comp>
         </nav>
         <!-- 3-1. 로그인/회원가입 컴포넌트 -->
         <user-comp></user-comp>
@@ -48,166 +51,172 @@
       <div class="cont">
         <!-- section1 : 배너영역 -->
         <section id="main_banner">
-          <div class="mSwiper mySwiper">
-            <ul class="swiper-wrapper">
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_1.jpg" alt="배너이미지1">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_2.jpg" alt="배너이미지2">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_3.jpg" alt="배너이미지3">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_4.jpg" alt="배너이미지4">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_5.jpg" alt="배너이미지5">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_6.jpg" alt="배너이미지6">
-                </li>
-                <li class="swiper-slide">
-                    <img src="./images/main/front/pc_7.jpg" alt="배너이미지7">
-                </li>
-            </ul>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <button type="button" class="swiper-btn-toggle"></button>
-            <div class="pagination_container">
-              <div class="swiper-pagination"></div>
+            <div class="mSwiper mySwiper">
+              <ul class="swiper-wrapper">
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_1.jpg" alt="배너이미지1">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_2.jpg" alt="배너이미지2">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_3.jpg" alt="배너이미지3">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_4.jpg" alt="배너이미지4">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_5.jpg" alt="배너이미지5">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_6.jpg" alt="배너이미지6">
+                  </li>
+                  <li class="swiper-slide">
+                      <img src="./images/main/front/pc_7.jpg" alt="배너이미지7">
+                  </li>
+              </ul>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <button type="button" class="swiper-btn-toggle"></button>
             </div>
-          </div>
         </section>
         <!-- section2 : best -->
         <mb-comp></mb-comp>
         <!-- section3 : special -->
         <section class="main_special">
             <div class="mstit">
-              <h3 class="main_tit">Magazine</h3>
-              <div class="morebtn">
-                <a href="#">전체보기</a>
-              </div>
+                <h3 class="main_tit">Magazine</h3>
             </div>
-            <div class="msWrap">
-                <div class="msList">
-                    <figure>
-                        <div class="special-img">
-                            <img src="./images/main/special/ban1.jpg" alt="트렌드 샌들"/>
-                        </div>
-                    </figure>
-                    <figcaption>
-                        <h4 class="special-tit">TREND SANDAL</h4>
-                        <p class="special-desc">더운 여름엔 시원한 아이템</p>
-                    </figcaption>
-                </div>
-                <div class="msList">
-                    <figure>
-                        <div class="special-img">
-                            <img src="./images/main/special/ban2.jpg" alt="피크닉"/>
-                        </div>
-                    </figure>
-                    <figcaption>
-                        <h4 class="special-tit">SUMMER PICNIC</h4>
-                        <p class="special-desc">청량함 가득한 싱그러운 일상</p>
-                    </figcaption>
-                </div>
-                <div class="msList">
-                    <figure>
-                        <div class="special-img">
-                            <img src="./images/main/special/ban3.jpg" alt="장마"/>
-                        </div>
-                    </figure>
-                    <figcaption>
-                        <h4 class="special-tit">IT'S RAINY DAY</h4>
-                        <p class="special-desc">올 여름 가장 완벽한 장마 준비</p>
-                    </figcaption>
-                </div>
-                <div class="msList">
-                    <figure>
-                        <div class="special-img">
-                            <img src="./images/main/special/ban4.jpg" alt="OOTD"/>
-                        </div>
-                    </figure>
-                    <figcaption>
-                        <h4 class="special-tit">SUPPORTERS 아임슈페너</h4>
-                        <p class="special-desc">아임슈페너들의 OOTD</p>
-                    </figcaption>
-                </div>
+            <div class="msWrap_box">
+                <ul class="msWrap_inner">
+                    <li class="msList">
+                        <figure>
+                            <div class="special-img">
+                                <img src="/images/main/special/ban1.jpg" alt="트렌드 샌들"/>
+                            </div>
+                        </figure>
+                        <figcaption>
+                            <h4 class="special-tit">TREND SANDAL</h4>
+                            <p class="special-desc">
+                                더운 여름엔 시원한 아이템
+                            </p>
+                        </figcaption>
+                    </li>
+                    <li class="msList">
+                        <figure>
+                            <div class="special-img">
+                                <img src="/images/main/special/ban2.jpg" alt="피크닉"/>
+                            </div>
+                        </figure>
+                        <figcaption>
+                            <h4 class="special-tit">SUMMER PICNIC</h4>
+                            <p class="special-desc">
+                                청량함 가득한 싱그러운 일상
+                            </p>
+                        </figcaption>
+                    </li>
+                    <li class="msList">
+                        <figure>
+                            <div class="special-img">
+                                <img src="/images/main/special/ban3.jpg" alt="장마"/>
+                            </div>
+                        </figure>
+                        <figcaption>
+                            <h4 class="special-tit">IT'S RAINY DAY</h4>
+                            <p class="special-desc">
+                                올 여름 가장 완벽한 장마 준비
+                            </p>
+                        </figcaption>
+                    </li>
+                    <li class="msList">
+                        <figure>
+                            <div class="special-img">
+                                <img
+                                    src="/images/main/special/ban4.jpg"
+                                    alt="OOTD"/>
+                            </div>
+                        </figure>
+                        <figcaption>
+                            <h4 class="special-tit">SUPPORTERS 아임슈페너</h4>
+                            <p class="special-desc">아임슈페너들의 OOTD</p>
+                        </figcaption>
+                    </li>
+                </ul>
             </div>
         </section>
         <!-- section3 : media -->
         <section class="main_media">
-          <div class="mSwiper3 mySwiper media_wrap">
-            <h3>MEDIA</h3>
-            <ul class="swiper-wrapper">
-                <med-comp v-for="(v,i) in mData" :key="i" :matchmedia="v" :dpt1val="v.depth1" :dpt2val="v.depth2"></med-comp>
-            </ul>
-          </div>
+            <h3>Media</h3>
+            <div class="md_wrap">
+                <div class="md_list">
+                    <ul>
+                        <med-comp v-for="(v, i) in mData" :key="i" :matchmedia="v" :dpt1val="v.depth1" :dpt2val="v.depth2"></med-comp>
+                    </ul>
+                </div>
+            </div>
         </section>
         <!-- section4 : new -->
         <mn-comp></mn-comp>
         <!-- section5 : offline -->
         <section class="main_store">
-          <div class="store">
-            <div class="storetit">
-              <h2>OFF-LINE</h2>
+            <div class="store">
+              <div class="storetit">
+                <h2>OFF-LINE</h2>
+              </div>
             </div>
-          </div>
-          <div class="map_search_wrap">
-            <div class="map_search">
-              <div class="tabbx">
-                <ul>
-                  <li>매장찾기</li>
-                  <li>지역검색</li>
-                </ul>
-              </div>
-              <!-- 지역검색 클릭시 표시될 부분 -->
-              <div id="map_contents">
-                <div class="txt_title2">
-                  <b>지역검색</b>
+            <div class="map_search_wrap">
+              <div class="map_search">
+                <div class="tabbx">
+                  <ul>
+                    <li>매장찾기</li>
+                    <li>지역검색</li>
+                  </ul>
                 </div>
-                <div class="locals"></div>
-              </div>
-              <!-- 매장찾기 클릭시 표시될 부분 -->
-                <div class="txtbx">
-                  <div class="txt_inner">
-                    <div class="txt_title">
-                      <b>매장찾기</b>
+                <!-- 지역검색 클릭시 표시될 부분 -->
+                <div id="map_contents">
+                  <div class="txt_title2">
+                    <b>지역검색</b>
+                  </div>
+                  <div class="locals"></div>
+                </div>
+                <!-- 매장찾기 클릭시 표시될 부분 -->
+                  <div class="txtbx">
+                    <div class="txt_inner">
+                      <div class="txt_title">
+                        <b>매장찾기</b>
+                      </div>
+                      <div class="txt_cont">
+                        <label>
+                          <input type="text" id="store_search" name="store_search" placeholder="지점명을 입력하세요." />
+                        </label>
+                        <i class="fa-regular fa-magnifying-glass"></i>
+                      </div>
                     </div>
-                    <div class="txt_cont">
-                      <label>
-                        <input type="text" id="store_search" name="store_search" placeholder="지점명을 입력하세요." />
-                      </label>
-                      <i class="fa-regular fa-magnifying-glass"></i>
+                  </div>
+                  <div class="contbx">
+                    <div class="cont_inner"></div>
+                  </div>
+              </div>
+              <div class="map_list">
+                <div class="map_inner">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2874780708453!2d127.0242945754061!3d37.50113732787629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f5f796c1%3A0x9f057c75dd5ba9!2z7IqI7Y6cIOygkO2UhOuwgOudvOuFuOygkA!5e0!3m2!1sko!2skr!4v1692079929612!5m2!1sko!2skr" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"> </iframe>
+                </div>
+                <!-- 지점 좌표 위 안내툴팁 -->
+                <div class="map_info">
+                  <div class="map_info_inner">
+                    <div class="info_tit_bx">
+                      <h3>점프밀라노점</h3>
+                      <p>서울특별시 강남구 강남대로 432 점프밀라노 강남점 지하1층</p>
+                      <p>02-6203-6881</p>
+                    </div>
+                    <div class="morebtn_bx">
+                      <em>자세히 보기</em>
                     </div>
                   </div>
+                  <span></span>
                 </div>
-                <div class="contbx">
-                  <div class="cont_inner"></div>
-                </div>
-            </div>
-            <div class="map_list">
-              <div class="map_inner">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2874780708453!2d127.0242945754061!3d37.50113732787629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f5f796c1%3A0x9f057c75dd5ba9!2z7IqI7Y6cIOygkO2UhOuwgOudvOuFuOygkA!5e0!3m2!1sko!2skr!4v1692079929612!5m2!1sko!2skr" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"> </iframe>
-              </div>
-              <!-- 지점 좌표 위 안내툴팁 -->
-              <div class="map_info">
-                <div class="map_info_inner">
-                  <div class="info_tit_bx">
-                    <h3>점프밀라노점</h3>
-                    <p>서울특별시 강남구 강남대로 432 점프밀라노 강남점 지하1층</p>
-                    <p>02-6203-6881</p>
-                  </div>
-                  <div class="morebtn_bx">
-                    <em>자세히 보기</em>
-                  </div>
-                </div>
-                <span></span>
               </div>
             </div>
-          </div>
         </section>
       </div>
     </main>
@@ -224,11 +233,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- 뷰JS vuex CDN -->
     <script src="https://unpkg.com/vuex@3.0.0"></script>
-    <!-- 엑시오스 라이브러리 스텐드얼론 버전 가져오기 -->
-    <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
-
     <!-- 스와이퍼 JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- 부트스트랩 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- 제이쿼리 라이브러리 -->
     <script src="./js/plugin/jquery-3.6.0.min.js"></script>

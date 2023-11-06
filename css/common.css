@@ -1,26 +1,20 @@
-@charset "utf-8";
-
+@charset "UTF-8";
 /* 웹&앱PJ 메인모듈 CSS - main.css */
-
 /* 공통 css 셋팅 */
 @import url(./reset.css);
 @import url(./core.css);
-
+@import url(../css/mediaQuery/com_media.css);
 :root {
   /* 브랜드색상 변수 */
   --shoopen-color-main: #fff;
   /* 한글 - 브랜드폰트 변수 */
   --shoopen-font-main: "Noto Sans KR", sans-serif;
-  --shoopen-font-sub: 'Roboto Condensed', sans-serif;
+  --shoopen-font-sub: "Roboto Condensed", sans-serif;
   --shoopen-font-title: "Work Sans", sans-serif;
-  --shoopen-font-prodtxt: 'Malgun Gothic Boot', sans-serif;
+  --shoopen-font-prodtxt: "Malgun Gothic Boot", sans-serif;
   --shoopen-font-footer: "Pretendard_Regular";
   /* 영문 - 브랜드폰트 변수 */
   --shoopen-font-eng: "Manrope", sans-serif;
-}
-
-.cont * {
-  /* outline: 1px dashed black; */
 }
 
 /*************** 상단영역 ***************/
@@ -31,8 +25,7 @@
   z-index: 999;
   width: 100%;
 }
-
-nav {
+.fxbx nav {
   /* 플렉스박스 */
   display: flex;
   justify-content: space-between;
@@ -41,10 +34,62 @@ nav {
   white-space: nowrap;
   background-color: var(--shoopen-color-main);
   transition: 0.3s ease;
-  overflow: hidden;
   z-index: 999;
   position: relative;
   border-bottom: 1px solid #ccc;
+}
+.fxbx nav .mo_menu {
+  /* MO 햄버거 버튼 */
+  display: none;
+  cursor: pointer;
+}
+
+/* MO GNB 메뉴 */
+#accordionDepth1 {
+  position: absolute;
+  left: -10px;
+  height: 100vh;
+  width: calc(100vw - 15px);
+  font-size: 14px;
+  background-color: #fff;
+  top: 50px;
+  display: none;
+}
+#accordionDepth1 .accordion-button {
+  font-size: 15px;
+  gap: 30px;
+  font-weight: 500;
+  height: 50px;
+  padding: 13px 13px 13px 20px;
+}
+#accordionDepth1 .accordion-body {
+  padding: 13px 13px 13px 20px;
+}
+#accordionDepth1 .accordion-body li {
+  padding: 5px 0;
+  font-size: 15px;
+}
+#accordionDepth1 .accordion-body li:nth-child(2) {
+  margin-bottom: 5px;
+}
+#accordionDepth1 .accordion-body .dpt3 > li {
+  font-size: 14px;
+}
+#accordionDepth1 .nbmenu_btn {
+  padding: 13px 0 13px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+#accordionDepth1 .nbmenu_btn li {
+  height: 50px;
+  line-height: 50px;
+}
+#accordionDepth1 .accordion-item {
+  border: none;
+}
+#accordionDepth1 .accordion-item .dpt2 {
+  padding-left: 0;
 }
 
 /* 클래스 on */
@@ -181,7 +226,9 @@ nav {
 /* 위시리스트 영역 */
 .side > .wishbtn {
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .side > .wishbtn > .callout {
@@ -282,7 +329,7 @@ nav {
   position: absolute;
   top: 0;
   right: 0;
-  width: 320px;
+  width: min(300px, 90vw);
   height: 100vh;
   padding: 10px;
   background-color: #fff;
@@ -397,11 +444,11 @@ tr > th:nth-child(3) {
   width: 21px;
   height: 21px;
   border-left: 1px solid #999;
-  background: url(../images/icon/ico_detail_all.png) no-repeat -245px -20px;;
+  background: url(../images/icon/ico_detail_all.png) no-repeat -245px -20px;
 }
 
-.opt_num input[type="number"]::-webkit-outer-spin-button,
-.opt_num input[type="number"]::-webkit-inner-spin-button {
+.opt_num input[type=number]::-webkit-outer-spin-button,
+.opt_num input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
@@ -445,7 +492,7 @@ tr > th:nth-child(3) {
   position: absolute;
   top: 0;
   right: 0;
-  width: 500px;
+  width: min(500px, 100vw);
   height: 100vh;
   padding: 30px 50px;
   background-color: #fff;
@@ -466,8 +513,8 @@ tr > th:nth-child(3) {
   font-size: 3rem;
 }
 
-#login-form input[type="text"],
-#signup-form input:not([type="submit"]) {
+#login-form input[type=text],
+#signup-form input:not([type=submit]) {
   border: none;
   padding: 15px 0;
   background-color: #f8f8f8;
@@ -611,7 +658,7 @@ span.gol {
   justify-content: center;
 }
 
-.gen > input[type="radio"] {
+.gen > input[type=radio] {
   margin-left: 5px;
 }
 
@@ -665,7 +712,9 @@ span.gol {
 /* 동의 조항박스 */
 .termsbx {
   display: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .terms_list {
@@ -692,7 +741,7 @@ span.gol {
   font-size: 1.2rem;
 }
 
-.article+.article {
+.article + .article {
   margin-top: 10px;
 }
 
@@ -714,7 +763,6 @@ span.gol {
 }
 
 /*************** 하단영역 ***************/
-
 /* 푸터 공통 셋팅 */
 footer {
   position: relative;
@@ -886,4 +934,4 @@ footer .info {
   width: 100%;
   height: 100%;
   transition: 0.3s ease;
-}
+}/*# sourceMappingURL=common.css.map */

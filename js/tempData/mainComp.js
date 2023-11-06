@@ -4,9 +4,9 @@ const mainData = {
     <section class="main_best">
         <div class="mbtit_bx">
             <dl class="mbtit1">
-                <dt class="main_tit">BEST PICK</dt>
+                <dt class="main_tit">Best Pick</dt>
                 <dd class="morebtn">
-                    <a href="#">전체보기</a>
+                    <a href="/prod.html?cat=all&best">전체보기</a>
                 </dd>
             </dl>
             <dl class="mbtit2">
@@ -15,9 +15,9 @@ const mainData = {
                 </dd>
             </dl>
         </div>
-        <div class="mbList">
-            <ul>
-                <li class="bestItem" v-for="(a,b) in m_bestData['bestItem'+$store.state.setNumber]" :key="b">
+        <div class="mbList_bx btSwiper mySwiper">
+            <ul class="swiper-wrapper">
+                <li class="bestItem swiper-slide" v-for="(a,b) in m_bestData['bestItem'+$store.state.setNumber]" :key="b" @click="moveDet(a)">
                     <!-- 이미지 -->
                     <a href="#">
                         <div class="best-img">
@@ -57,7 +57,7 @@ const mainData = {
             <dl class="mbtit1">
                 <dt class="main_tit">New Arrival</dt>
                 <dd class="morebtn">
-                    <a href="#">전체보기</a>
+                    <a href="/prod.html?cat=all&new">전체보기</a>
                 </dd>
             </dl>
             <dl class="mntit2">
@@ -66,9 +66,9 @@ const mainData = {
                 </dd>
             </dl>
         </div>
-        <div class="mnList">
-            <ul>
-                <li class="newItem" v-for="(a,b) in m_newData['newItem'+$store.state.setNumber]" :key="b">
+        <div class="mnList_bx nwSwiper mySwiper">
+            <ul class="swiper-wrapper">
+                <li class="newItem swiper-slide" v-for="(a,b) in m_newData['newItem'+$store.state.setNumber]" :key="b" @click="moveDet(a)">
                     <!-- 이미지 -->
                     <a href="#">
                         <div class="new-img">
@@ -105,4 +105,3 @@ const mainData = {
 
 
 export default mainData;
-

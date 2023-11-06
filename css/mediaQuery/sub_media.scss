@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+/* 서브 미디어쿼리 SCSS - sub_media.scss */
+@media screen and (max-width: 1230px) {
+    .reviews_body ul {
+        grid-template-columns: repeat(3, 1fr) !important; 
+    }
+}
+@media screen and (max-width: 1000px) {
+    .event_info img {
+        width: 200% !important;
+        transform: translateX(-25%);
+    }
+    .prize_bx {
+        margin: 0px 0px 10px 0px !important;
+        padding: 10px !important;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .reviews_body ul {
+        grid-template-columns: repeat(2, 1fr) !important; 
+    }
+    .reviews_body ul li {
+        width: calc(min(300px, 70vw)) !important;
+    }
+}
+
+@media screen and (max-width: 905px) {
+    .reviews_body .photo_wrap {
+        display: flex !important;
+        flex-wrap: wrap;
+
+        li {
+            width: 100% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    // 상품리스트
+    .prod_cont > ul,
+    .ui-col4 {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .prd-cat-option > ul {
+        display: none !important;
+    }
+    .mo_sorting {
+        display: block !important;
+    }
+    .reviews_bx {
+        flex-direction: column;
+    }
+    // 일반리뷰 박스
+    .general_wrap {
+        display: block !important;
+
+        .left_bx {
+            width: 100% !important;
+            border-right: none !important;
+        }
+        .right_bx {
+            width: 100% !important;
+            padding-left: 10px !important;
+        }
+    }
+    .view_type {
+        border: none !important;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .filter_search tr {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .reviews_gal {
+        flex-direction: column;
+        align-items: center;
+    }
+    .winner_info .winner_body .reviews {
+        width: calc(100% - 10vw) !important;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .filter_price {
+        flex-direction: column;
+        align-items: normal !important;
+        gap: 15px !important;
+        width: fit-content;
+    }
+    .filter_price #filter_price_view {
+        width: 100% !important;
+    }
+    .filter_color li {
+        width: auto !important;
+    }
+    .filter_color {
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    // 상품리스트
+    .prod_cont > ul,
+    .ui-col4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .cate_main_tit {
+        display: flex;
+        flex-direction: column;
+
+        .catmenu::before {
+            display: none !important;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .prd-cat-option {
+        align-items: normal !important;
+        flex-direction: column;
+        justify-content: center !important;
+    }
+    .prd-cat-option .option-right {
+        justify-content: right;
+    }
+    .view_type {
+        width: 100% !important;
+        white-space: nowrap;
+
+        div {
+            width: 50% !important;
+        }
+    }
+    .opt2bx button {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .mo_sorting {
+        background-position: 80px 15px !important;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .mo_sorting {
+        background-position: 75px 15px !important;
+    }
+}
+
+@media screen and (max-width: 312px) {
+    .mo_sorting {
+        background-position: 70px 15px !important;
+    }
+}

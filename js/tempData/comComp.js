@@ -1,12 +1,12 @@
 const comData = {
     /* 1. new/best 아이템 */
     prdComp: `
-        <div class="new_inner">
+        <div class="prod_inner">
             <h2>{{$store.state.curUrl1.toUpperCase()}}</h2>
-            <div class="new_items">
+            <div class="prod_items">
               <div class="prod_tab">
                 <ul>
-                  <li v-for="(v,i) in catTit" :key="i" @click="$store.commit('chgList', v)">
+                  <li v-for="(v,i) in catTit" :key="i" @click.prevent="$store.commit('chgList', v)">
                     <a href="#">{{v.toUpperCase()}}</a>
                   </li>
                 </ul>
@@ -14,40 +14,48 @@ const comData = {
               <div class="prod_cont">
                 <ul>
                   <template v-for="(v,i) in prdData[$store.state.curUrl1]">
-                      <li v-for="(x,y) in v" :key="x.name" v-if="$store.state.setcat === i || $store.state.setcat === 'all'">
-                        <div class="prodbx">
-                            <a href="#">
-                                <div class="prod_img">
-                                    <img :src="'./images/goods/'+x.img+'.jpg'" alt="x.name">
+                    <template v-for="x in v">
+                          <li @click.prevent="getData(x)" v-if="$store.state.setcat === i || $store.state.setcat === 'all' && x.idx>=0 && x.idx<12+$store.state.mnum">
+                            <div class="prodbx">
+                                <a href="#">
+                                    <div class="prod_img">
+                                        <img :src="'./images/goods/'+x.img+'.jpg'" alt="x.name">
+                                    </div>
+                                </a>
+                                <div title="찜하기" class="product_like" v-on:click="addWish(x,1)">
+                                    <button type="button" class="fa-solid fa-heart"></button>
                                 </div>
-                            </a>
-                            <div title="찜하기" class="product_like" v-on:click="addWish(x,1)">
-                                <button type="button" class="fa-solid fa-heart"></button>
                             </div>
-                        </div>
-                        <div class="prod-detail">
-                            <div class="prod_txt">
-                                <strong class="brand">슈펜</strong>
-                                <p>{{x.name}}</p>
+                            <div class="prod-detail">
+                                <div class="prod_txt">
+                                    <strong class="brand">슈펜</strong>
+                                    <p>{{x.name}}</p>
+                                </div>
+                                <div class="pricebx">
+                                    <span class="original-price">
+                                        <em>{{setComma(x.oprice)}}</em>
+                                        <span v-if="x.oprice">원</span>
+                                    </span>
+                                    <br>
+                                    <span class="discount-price">
+                                        <em>{{setComma(x.dprice)}}</em>
+                                        <span>원</span>
+                                    </span>
+                                    <span class="percent-price" v-if="x.oprice && x.dprice">
+                                        <em>{{setDiscount(x.oprice,x.dprice)}}</em>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="pricebx">
-                                <span class="original-price">
-                                    <em>{{setComma(x.oprice)}}</em>
-                                    <span v-if="x.oprice">원</span>
-                                </span>
-                                <br>
-                                <span class="discount-price">
-                                    <em>{{setComma(x.dprice)}}</em>
-                                    <span>원</span>
-                                </span>
-                                <span class="percent-price" v-if="x.oprice && x.dprice">
-                                    <em>{{setDiscount(x.oprice,x.dprice)}}</em>
-                                </span>
-                            </div>
-                        </div>
-                      </li>
+                          </li>
+                      </template>
                   </template>
                 </ul>
+              </div>
+              <!-- 여기부터 디테일페이지! -->
+              <dt-comp v-if="showDt" :style="compStyle" @close-detail="closeDetail"/></dt-comp>
+              <!-- new 페이지 더보기 버튼 -->
+              <div class="btnwrap" v-if="$store.state.mbtn && $store.state.setcat === 'all'">
+                <button type="button" class="more_btn" @click="$store.commit('updateList', 12)">View More</button>
               </div>
             </div>
         </div>
@@ -107,7 +115,7 @@ const comData = {
                     <a href="#">장바구니</a>
                     <a href="#">구매</a>
                 </div>
-                <div class="buybtn clbtn" v-on:click="wishClose()">
+                <div class="buybtn clbtn" v-on:click.prevent="wishClose()">
                     <a href="#">
                         닫기
                         <i class="fa-solid fa-xmark"></i>
@@ -117,7 +125,7 @@ const comData = {
         </div>
     </aside>
     `,
-    
+
     /* 3. 로그인 템플릿 */
     userComp: `
         <aside class="user_comp">
@@ -363,6 +371,228 @@ const comData = {
                 </div>
             </form>
         </div>
+    </div>
+    `,
+
+    /* MO 메뉴 */
+    menuComp: `
+    <!-- MO GNB 메뉴 -->
+    <div class="mo_menu">
+        <img src="/images/icon/ico_ctg_black.png" alt="모바일메뉴">
+        <div class="accordion" id="accordionDepth1">
+            <ul class="nbmenu_btn">
+                <li v-on:click.prevent="linkData('all', 'new')">
+                    NEW
+                </li>
+                <li v-on:click.prevent="linkData('all', 'best')">
+                    BEST
+                </li>
+            </ul>
+            <!-- depth1 / WOMEN -->
+            <div class="accordion-item wsCol">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#wsColOne" aria-expanded="true" aria-controls="wsColOne">
+                        WOMEN
+                    </button>
+                </h2>
+                <div id="wsColOne" class="accordion-collapse collapse" data-bs-parent="#accordionDepth1">
+                    <ul class="accordion-body">
+                        <li v-on:click.prevent="linkData('women', 'new')">신상</li>
+                        <li v-on:click.prevent="linkData('women', 'best')">베스트</li>
+                        <!-- depth2 / 신발 -->
+                        <div class="accordion" id="wsColTwo">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#wsColThree" aria-expanded="false" aria-controls="wsColThree">
+                                        여성신발
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="wsColThree" class="accordion-collapse collapse" data-bs-parent="#wsColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('women', 'shoes', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('women', 'shoes', '플랫슈즈')">플랫슈즈</li>
+                                        <li v-on:click.prevent="linksys('women', 'shoes', '샌들')">샌들</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 가방 -->
+                        <div class="accordion" id="wsColTwo2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#wsColThree2" aria-expanded="false" aria-controls="wsColThree2">
+                                        여성가방
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="wsColThree2" class="accordion-collapse collapse" data-bs-parent="#wsColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('women', 'bag', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('women', 'bag', '백팩')">백팩</li>
+                                        <li v-on:click.prevent="linksys('women', 'bag', '미니백')">미니백</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 잡화 -->
+                        <div class="accordion" id="wsColTwo3">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#wsColThree3" aria-expanded="false" aria-controls="wsColThree3">
+                                        여성잡화
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="wsColThree3" class="accordion-collapse collapse" data-bs-parent="#wsColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('women', 'ac', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('women', 'ac', '양말')">양말</li>
+                                        <li v-on:click.prevent="linksys('women', 'ac', '모자')">모자</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <!-- depth1 / MEN -->
+            <div class="accordion-item msCol">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#msColOne" aria-expanded="true" aria-controls="msColOne">
+                        MEN
+                    </button>
+                </h2>
+                <div id="msColOne" class="accordion-collapse collapse" data-bs-parent="#accordionDepth1">
+                    <ul class="accordion-body">
+                        <li v-on:click.prevent="linkData('men', 'new')">신상</li>
+                        <li v-on:click.prevent="linkData('men', 'best')">베스트</li>
+                        <!-- depth2 / 신발 -->
+                        <div class="accordion" id="msColTwo">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#msColThree" aria-expanded="false" aria-controls="msColThree">
+                                        남성신발
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="msColThree" class="accordion-collapse collapse" data-bs-parent="#msColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('men', 'shoes', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('men', 'shoes', '스니커즈')">스니커즈</li>
+                                        <li v-on:click.prevent="linksys('men', 'shoes', '슬리퍼')">슬리퍼</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 가방 -->
+                        <div class="accordion" id="msColTwo2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#msColThree2" aria-expanded="false" aria-controls="msColThree2">
+                                        남성가방
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="msColThree2" class="accordion-collapse collapse" data-bs-parent="#msColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('men', 'bag', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('men', 'bag', '맨즈백')">맨즈백</li>
+                                        <li v-on:click.prevent="linksys('men', 'bag', '크로스백')">크로스백</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 잡화 -->
+                        <div class="accordion" id="msColTwo3">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#msColThree3" aria-expanded="false" aria-controls="msColThree3">
+                                        남성잡화
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="msColThree3" class="accordion-collapse collapse" data-bs-parent="#msColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('men', 'ac', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('men', 'ac', '양말')">양말</li>
+                                        <li v-on:click.prevent="linksys('men', 'ac', '모자')">모자</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <!-- depth1 / KIDS -->
+            <div class="accordion-item ksCol">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ksColOne" aria-expanded="true" aria-controls="ksColOne">
+                        KIDS
+                    </button>
+                </h2>
+                <div id="ksColOne" class="accordion-collapse collapse" data-bs-parent="#accordionDepth1">
+                    <ul class="accordion-body">
+                        <li v-on:click.prevent="linkData('kids', 'new')">신상</li>
+                        <li v-on:click.prevent="linkData('kids', 'best')">베스트</li>
+                        <!-- depth2 / 신발 -->
+                        <div class="accordion" id="ksColTwo">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#ksColThree" aria-expanded="false" aria-controls="ksColThree">
+                                        아동신발
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="ksColThree" class="accordion-collapse collapse" data-bs-parent="#ksColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('kids', 'shoes', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('kids', 'shoes', '구두')">구두</li>
+                                        <li v-on:click.prevent="linksys('kids', 'shoes', '샌들')">샌들</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 가방 -->
+                        <div class="accordion" id="ksColTwo2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#ksColThree2" aria-expanded="false" aria-controls="ksColThree2">
+                                        아동가방
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="ksColThree2" class="accordion-collapse collapse" data-bs-parent="#ksColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('kids', 'bag', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('kids', 'bag', '슬리퍼가방')">슬리퍼가방</li>
+                                        <li v-on:click.prevent="linksys('kids', 'bag', '패션가방')">패션가방</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- depth2 / 잡화 -->
+                        <div class="accordion" id="ksColTwo3">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button dpt2" type="button" data-bs-toggle="collapse" data-bs-target="#ksColThree3" aria-expanded="false" aria-controls="ksColThree3">
+                                        아동잡화
+                                    </button>
+                                </h2>
+                                <!-- depth3 -->
+                                <div id="ksColThree3" class="accordion-collapse collapse" data-bs-parent="#ksColOne">
+                                    <ul class="accordion-body dpt3">
+                                        <li v-on:click.prevent="linksys('kids', 'ac', '전체')">전체</li>
+                                        <li v-on:click.prevent="linksys('kids', 'ac', '양말')">양말</li>
+                                        <li v-on:click.prevent="linksys('kids', 'ac', '모자')">모자</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>  
     </div>
     `,
 };

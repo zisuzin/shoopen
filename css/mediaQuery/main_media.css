@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* 메인 미디어쿼리 SCSS */
+@media screen and (max-width: 1320px) {
+  .mSwiper {
+    height: auto !important;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .map_list {
+    display: none;
+  }
+  .map_search_wrap .map_search {
+    position: inherit !important;
+    width: 100% !important;
+    transform: inherit !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+  .contbx {
+    padding: 0 !important;
+  }
+  .contbx .cont_inner {
+    padding: 0 10px !important;
+  }
+  .main_best,
+  .main_special,
+  .main_media,
+  .main_new,
+  .main_store {
+    padding: 32px !important;
+  }
+  figure img {
+    aspect-ratio: inherit !important;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .txt_cont label {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 900px) {
+  .mbtit_bx {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 800px) {
+  .md_wrap ul li {
+    width: 300px !important;
+  }
+  .main_special .msWrap_box .msWrap_inner {
+    flex-direction: column;
+  }
+  .msList,
+  .msWrap_inner {
+    width: 100% !important;
+  }
+  .main_special {
+    height: 100% !important;
+  }
+  .special-tit,
+  .special-desc {
+    text-align: left !important;
+    margin-top: 0;
+  }
+  .msList figcaption {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .morebtn > a {
+    font-size: min(1.5rem, 4vw) !important;
+  }
+}
+@media screen and (max-width: 900px) {
+  .mbtit_bx {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mbtit2 > dd a,
+  .morebtn > a {
+    font-size: min(1.5rem, 4vw);
+  }
+  .mbList_bx {
+    overflow: visible !important;
+  }
+}/*# sourceMappingURL=main_media.css.map */

@@ -148,4 +148,61 @@ function mapSearch() {
 
 mapSearch();
 
+// 타겟선정
+const tgBox = document.querySelector(".main_special");
+const mvBox = document.querySelector(".msWrap_inner");
+const body = document.querySelector("body");
+
+const retVal = x => x.getBoundingClientRect().top;
+
+/************************************** 
+    함수명 : moveSec
+    기능 : 가로방향 이동하기
+**************************************/
+function moveSec() {
+    // 1. 타겟박스의 바운딩위치값 찍기
+    let tgPos = retVal(tgBox);
+    // 오버플로우 히든 해제
+    body.setAttribute('style', 'overflow: visible');
+
+    // 2. 가로이동박스(mvbx)의 left값 변경하기
+    // 타겟박스의 바운딩값을 left값으로 넣어준다!
+    // 이유: 바운딩수치 === left값수치 === -3000px
+    // -> 최대이동값이 마이너스로 한계값이 일치함!
+    // 대상: mvbx
+    // 적용구간설정: 0 이하 -3000px 이상
+    if (tgPos <= -75 && tgPos >= -2973.375) {
+        mvBox.style.left = tgPos + "px";
+    }
+    // 위쪽(0초과)일때 처음위치 재설정하기
+    else if (tgPos > 0) {
+        mvBox.style.left = "0";
+    }
+}
+
+window.addEventListener("resize", chgMove);
+
+/************************************** 
+    함수명 : chgMove
+    기능 : PC/MO 판별 함수
+**************************************/
+function chgMove() {
+    // 윈도우 가로사이즈
+    let winW = window.innerWidth;
+
+    // 모바일버전
+    if (winW <= 800) {
+        // 초기화
+        mvBox.style.left = "0";
+        // 스크롤 기능 제거
+        window.removeEventListener("scroll", moveSec);
+    }
+    // PC 버전
+    else {
+        // 스크롤시 스티키 구간에서 가로방향 이동 구현
+        window.addEventListener("scroll", moveSec);
+    }
+}
+
+chgMove();
 
