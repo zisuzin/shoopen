@@ -233,6 +233,16 @@ Vue.component("goods-comp", {
               </div>
               <!-- 상품옵션 선택박스 -->
               <div class="prd-cat-option">
+              <!-- MO 상품정렬 탭 -->
+              <div class="mo_sorting">
+                <button type="button">상품 정렬</button>
+                <ul id="sort_btn">
+                    <li @click.prevent="sortFn('new_prd')">신상품순</li>
+                    <li @click.prevent="sortFn('low_price')">낮은가격순</li>
+                    <li @click.prevent="sortFn('high_price')">높은가격순</li>
+                    <li @click.prevent="sortFn('review')">상품평순</li>
+                </ul>
+              </div>
               <!-- 상품정렬 탭 -->
                 <ul class="option-left">
                     <li class="filter_option" @click.prevent="sortFn('new_prd')">
@@ -417,6 +427,35 @@ Vue.component("goods-comp", {
       stit.text(pm2);
 
       return { chgtit, pm2 };
+    },
+    // MO 필터옵션 선택항목값으로 변경 함수
+    setOpt() {
+        const optBtn = document.querySelector('.mo_sorting > button');
+        const optList = document.querySelectorAll('#sort_btn > li');
+        const sortBtn = document.querySelector('#sort_btn');
+
+        // optBtn 텍스트를 선택항목으로 변경
+        const pickOpt = function(item) {
+            optBtn.innerText = item.innerText;
+            optBtn.parentNode.classList.remove('active');
+            sortBtn.style.display = 'none';
+        }
+
+        // 선택한 항목을 pickOpt함수에 파라미터로 전달 
+        optList.forEach(ele => ele.addEventListener('click', function() {
+            pickOpt(ele);
+        }));
+
+        // optBtn 클릭 상태에 따라 옵션박스 보임/숨김처리
+        optBtn.addEventListener('click', function() {
+            if (optBtn.parentNode.classList.contains('active')) {
+                optBtn.parentNode.classList.remove('active');
+                sortBtn.style.display = 'none';
+            } else {
+                optBtn.parentNode.classList.add('active');
+                sortBtn.style.display = 'block';
+            }
+        });
     },
     getData(pm) {
       // [ 스토어 전역변수에 업데이트! ]
@@ -688,6 +727,7 @@ Vue.component("goods-comp", {
     // 함수 호출!
     this.pdLength();
     this.moveSl();
+    this.setOpt();
   },
 }); //////////////////// Vue 컴포넌트 ///////////////////////
 
@@ -950,6 +990,19 @@ Vue.component("mb-comp", {
       m_bestData: m_bestData,
       notelnb: ["#1만원대 특가 신발", "#보부상 가방", "#썸머 슈즈"],
     };
+  },
+  methods: {
+    moveDet(pm) {
+        // 로컬스토리지에 데이터 저장
+        localStorage.setItem("detnm", pm.name);
+
+        // 페이지 이동
+        window.location.href = "prod.html?cat=all&best";
+        setTimeout(() => {
+            // store 함수 호출
+            this.$store.dispatch("setDet");
+        }, 1000);
+    },
   },
   mounted() {
     // 첫번째 dd에 강제 클릭

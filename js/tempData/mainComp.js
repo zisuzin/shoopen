@@ -6,7 +6,7 @@ const mainData = {
             <dl class="mbtit1">
                 <dt class="main_tit">Best Pick</dt>
                 <dd class="morebtn">
-                    <a href="/prod.html?cat=all&best">전체보기</a>
+                    <a href="https://zisuzin.github.io/shoopen/prod.html?cat=all&best">전체보기</a>
                 </dd>
             </dl>
             <dl class="mbtit2">
@@ -17,7 +17,7 @@ const mainData = {
         </div>
         <div class="mbList_bx btSwiper mySwiper">
             <ul class="swiper-wrapper">
-                <li class="bestItem swiper-slide" v-for="(a,b) in m_bestData['bestItem'+$store.state.setNumber]" :key="b" @click="moveDet(a)">
+                <li class="bestItem swiper-slide" v-for="(a,b) in m_bestData['bestItem'+$store.state.setNumber]" :key="b">
                     <!-- 이미지 -->
                     <a href="#">
                         <div class="best-img">
@@ -57,7 +57,7 @@ const mainData = {
             <dl class="mbtit1">
                 <dt class="main_tit">New Arrival</dt>
                 <dd class="morebtn">
-                    <a href="/prod.html?cat=all&new">전체보기</a>
+                    <a href="https://zisuzin.github.io/shoopen/prod.html?cat=all&new">전체보기</a>
                 </dd>
             </dl>
             <dl class="mntit2">
@@ -68,7 +68,7 @@ const mainData = {
         </div>
         <div class="mnList_bx nwSwiper mySwiper">
             <ul class="swiper-wrapper">
-                <li class="newItem swiper-slide" v-for="(a,b) in m_newData['newItem'+$store.state.setNumber]" :key="b" @click="moveDet(a)">
+                <li class="newItem swiper-slide" v-for="(a,b) in m_newData['newItem'+$store.state.setNumber]" :key="b">
                     <!-- 이미지 -->
                     <a href="#">
                         <div class="new-img">
