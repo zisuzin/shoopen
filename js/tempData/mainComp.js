@@ -6,7 +6,7 @@ const mainData = {
             <dl class="mbtit1">
                 <dt class="main_tit">Best Pick</dt>
                 <dd class="morebtn">
-                    <a href="https://zisuzin.github.io/shoopen/prod.html?cat=all&best">전체보기</a>
+                    <a href="/prod.html?cat=all&best">전체보기</a>
                 </dd>
             </dl>
             <dl class="mbtit2">
@@ -57,7 +57,7 @@ const mainData = {
             <dl class="mbtit1">
                 <dt class="main_tit">New Arrival</dt>
                 <dd class="morebtn">
-                    <a href="https://zisuzin.github.io/shoopen/prod.html?cat=all&new">전체보기</a>
+                    <a href="/prod.html?cat=all&new">전체보기</a>
                 </dd>
             </dl>
             <dl class="mntit2">

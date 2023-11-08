@@ -10,13 +10,13 @@ const dtData = {
                     <div class="swiper mySwiper1">
                         <ul class="swiper-wrapper">
                             <li class="swiper-slide">
-                            <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtimg + '.jpg'" alt="썸네일 대표이미지"/>
+                            <img :src="'/images/goods/' + $store.state.dtimg + '.jpg'" alt="썸네일 대표이미지"/>
                             </li>
                             <li class="swiper-slide">
-                            <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지1"/>
+                            <img :src="'/images/goods/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지1"/>
                             </li>
                             <li class="swiper-slide">
-                            <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지2"/>
+                            <img :src="'/images/goods/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지2"/>
                             </li>
                         </ul>
                         <div class="swiper-button-next toRbtn"></div>
@@ -26,13 +26,13 @@ const dtData = {
                     <div class="swiper mySwiper2">
                         <ul class="swiper-wrapper">
                             <li class="swiper-slide">
-                                <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtimg + '.jpg'" alt="썸네일 상세이미지1"/>
+                                <img :src="'/images/goods/' + $store.state.dtimg + '.jpg'" alt="썸네일 상세이미지1"/>
                             </li>
                             <li class="swiper-slide">
-                                <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지2"/>
+                                <img :src="'/images/goods/' + $store.state.dtsumimg2 + '.jpg'" alt="썸네일 상세이미지2"/>
                             </li>
                             <li class="swiper-slide">
-                                <img :src="'https://zisuzin.github.io/shoopen/images/goods/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지3"/>
+                                <img :src="'/images/goods/' + $store.state.dtsumimg3 + '.jpg'" alt="썸네일 상세이미지3"/>
                             </li>
                         </ul>
                     </div>

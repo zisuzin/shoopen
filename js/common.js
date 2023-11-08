@@ -346,7 +346,7 @@ Vue.component("goods-comp", {
                                   <div class="ui-prod-bx">
                                       <a href="#">
                                           <div class="prod-detail-img">
-                                              <img :src="'https://zisuzin.github.io/shoopen/images/goods/'+ a.img + '.jpg'" :alt="a.name">
+                                              <img :src="'/images/goods/'+ a.img + '.jpg'" :alt="a.name">
                                           </div>
                                       </a>
                                       <div title="찜하기" class="product_like" v-on:click="addWish(a,1)">
@@ -1028,7 +1028,7 @@ Vue.component("med-comp", {
                 <div class="media_thumb">
                     <img v-bind:src="tumbimg" alt="대표썸네일"/>
                     <span class="mlogo">
-                        <img src="https://zisuzin.github.io/shoopen/images/logo/logo_y.jpg" alt="sns계정명"/>
+                        <img src="/images/logo/logo_y.jpg" alt="sns계정명"/>
                         shoopen_official
                     </span>
                 </div>
@@ -1378,8 +1378,8 @@ new Vue({
          slimg.forEach((ele, idx) => {
                 // 기준점 변경에 따른 이미지 src 업데이트
                 // loop: true 옵션 때문에 idx 범위는 1~9! -> idx % 7 + 1 해서 1~7만 선정
-                isMobile ? ele.src = `https://zisuzin.github.io/shoopen/images/main/front/mo_${idx % 7 + 1}.jpg` :
-                ele.src = `https://zisuzin.github.io/shoopen/images/main/front/pc_${idx % 7 + 1}.jpg`;
+                isMobile ? ele.src = `/images/main/front/mo_${idx % 7 + 1}.jpg` :
+                ele.src = `/images/main/front/pc_${idx % 7 + 1}.jpg`;
             });
         }
 
