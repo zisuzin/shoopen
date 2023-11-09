@@ -168,7 +168,7 @@ main #main_banner .mSwiper .swiper-slide a {
 .morebtn > a {
   font-size: min(18px, 2.3vw);
   color: #767676;
-  background: url(https://zisuzin.github.io/shoopen/images/icon/arrow_s_r.png) center right no-repeat;
+  background: url(/images/icon/arrow_s_r.png) center right no-repeat;
   background-size: 8px auto;
   padding-right: 20px;
   font-weight: 500;
@@ -541,6 +541,8 @@ main #main_banner .mSwiper .swiper-slide a {
 }
 .map_search_wrap .map_search .txtbx .txt_inner .txt_cont label {
   margin-right: 10px;
+  width: 100%;
+  height: 100%;
 }
 .map_search_wrap .map_search .txtbx .txt_inner .txt_cont label input {
   background: #fff;
@@ -548,6 +550,7 @@ main #main_banner .mSwiper .swiper-slide a {
   border-radius: 5px;
   padding: 5px 15px;
   height: 100%;
+  font-size: 13px;
 }
 .map_search_wrap .map_search .txtbx .txt_inner .txt_cont .fa-magnifying-glass:before {
   font-weight: 900;
