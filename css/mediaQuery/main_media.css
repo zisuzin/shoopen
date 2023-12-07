@@ -74,12 +74,13 @@
   }
 }
 @media screen and (max-width: 900px) {
-  .mbtit_bx {
+  .mbtit_bx, .mntit_bx {
     flex-direction: column;
   }
 }
 @media screen and (max-width: 600px) {
   .mbtit2 > dd a,
+  .mntit2 > dd a,
   .morebtn > a {
     font-size: min(1.5rem, 4vw);
   }

@@ -279,6 +279,9 @@ main #main_banner .mSwiper .swiper-slide a {
   white-space: nowrap;
   overflow: hidden;
 }
+.best-txt .btxt2, .new-txt .btxt2 {
+  /* 상품 설명박스 */
+}
 .best-txt .btxt2 .original-price > em, .new-txt .btxt2 .original-price > em {
   text-decoration: line-through;
   color: #999;
