@@ -19,7 +19,7 @@ const comData = {
                             <div class="prodbx">
                                 <a href="#">
                                     <div class="prod_img">
-                                        <img :src="'/images/goods/'+x.img+'.jpg'" alt="x.name">
+                                        <img :src="'./images/goods/'+x.img+'.jpg'" alt="x.name">
                                     </div>
                                 </a>
                                 <div title="찜하기" class="product_like" v-on:click="addWish(x,1)">
@@ -83,7 +83,7 @@ const comData = {
                     <tbody>
                         <tr v-for="(v,i) in $store.state.wish" :key="i">
                             <td class="ws_img">
-                                <img :src="'/images/goods/'+v[0]+'.jpg'" alt="찜한 이미지" />
+                                <img :src="'./images/goods/'+v[0]+'.jpg'" alt="찜한 이미지" />
                             </td>
                             <!-- 상세 정보 -->
                             <td class="ws_info">
@@ -154,12 +154,12 @@ const comData = {
                         <ul class="login_sns">
                             <li>
                                 <a href="#">
-                                    <img src="/images/icon/icon_sns_kakaotalk.svg" alt="카카오톡 로그인"/>
+                                    <img src="./images/icon/icon_sns_kakaotalk.svg" alt="카카오톡 로그인"/>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="/images/icon/icon_sns_naver.png" alt="네이버 로그인"/>
+                                    <img src="./images/icon/icon_sns_naver.png" alt="네이버 로그인"/>
                                 </a>
                             </li>
                         </ul>
@@ -378,7 +378,7 @@ const comData = {
     menuComp: `
     <!-- MO GNB 메뉴 -->
     <div class="mo_menu">
-        <img src="/images/icon/ico_ctg_black.png" alt="모바일메뉴">
+        <img src="./images/icon/ico_ctg_black.png" alt="모바일메뉴">
         <div class="accordion" id="accordionDepth1">
             <ul class="nbmenu_btn">
                 <li v-on:click.prevent="linkData('all', 'new')">
