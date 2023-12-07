@@ -35,9 +35,6 @@
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .txt_cont label {
-    width: 50% !important;
-  }
 }
 @media screen and (max-width: 900px) {
   .mbtit_bx {
